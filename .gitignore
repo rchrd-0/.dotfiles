@@ -1,0 +1,5 @@
+.oh-my-zsh/custom/plugins/example/
+.config/karabiner/automatic_backups/
+.config/tmux/plugins/*
+!.config/tmux/plugins/tpm
+.DS_Store

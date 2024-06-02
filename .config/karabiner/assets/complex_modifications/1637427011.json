@@ -1,0 +1,614 @@
+{
+  "title": "@RCHRD's config",
+  "rules": [
+    {
+      "description": "fn (right_control) = hyper (⌃⌥⇧⌘)",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "right_control"
+          },
+          "to": [
+            {
+              "key_code": "left_shift",
+              "modifiers": ["left_command", "left_control", "left_option"]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+
+    {
+      "description": "caps_lock = control (in combination) || escape (alone)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "caps_lock",
+            "modifiers": {
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_control"
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "escape"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "caps_lock = control (in combination)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "caps_lock",
+            "modifiers": {
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_control"
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "caps_lock",
+              "hold_down_milliseconds": 500
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "left_shift (x2) = caps_lock",
+      "manipulators": [
+        {
+          "conditions": [
+            {
+              "name": "left_shift pressed",
+              "type": "variable_if",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "left_shift",
+            "modifiers": {
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "caps_lock"
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "left_shift",
+            "modifiers": {
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "left_shift pressed",
+                "value": 1
+              }
+            },
+            {
+              "key_code": "left_shift"
+            }
+          ],
+          "to_delayed_action": {
+            "to_if_canceled": [
+              {
+                "set_variable": {
+                  "name": "left_shift pressed",
+                  "value": 0
+                }
+              }
+            ],
+            "to_if_invoked": [
+              {
+                "set_variable": {
+                  "name": "left_shift pressed",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "left_shift + right_shift = caps_lock",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "left_shift",
+            "modifiers": {
+              "mandatory": ["right_shift"],
+              "optional": ["caps_lock"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "caps_lock"
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "left_shift"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "right_shift",
+            "modifiers": {
+              "mandatory": ["left_shift"],
+              "optional": ["caps_lock"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "caps_lock"
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "right_shift"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "shift + delete = forward delete",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "delete_or_backspace",
+            "modifiers": {
+              "mandatory": ["shift"],
+              "optional": ["caps_lock", "option"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "delete_forward"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "shift + option + delete = forward delete current word",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "delete_forward",
+            "modifiers": {
+              "mandatory": ["shift"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "delete_forward",
+              "modifiers": ["option"]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+
+    {
+      "description": "fn + i/j/k/l = arrow_keys",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "j",
+            "modifiers": {
+              "mandatory": ["fn"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_arrow"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "k",
+            "modifiers": {
+              "mandatory": ["fn"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "down_arrow"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "i",
+            "modifiers": {
+              "mandatory": ["fn"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "up_arrow"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "l",
+            "modifiers": {
+              "mandatory": ["fn"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_arrow"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "ctrl + i/j/k/l = arrow_keys",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "j",
+            "modifiers": {
+              "mandatory": ["left_control"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_arrow"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "k",
+            "modifiers": {
+              "mandatory": ["left_control"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "down_arrow"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "i",
+            "modifiers": {
+              "mandatory": ["left_control"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "up_arrow"
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "l",
+            "modifiers": {
+              "mandatory": ["left_control"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_arrow"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "F4 = Terminal",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "f4"
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'Terminal.app'"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "F4 = iTerm",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "f4"
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'iTerm.app'"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "F4 = Warp",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "f4"
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'Warp.app'"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "command + e = Finder",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "e",
+            "modifiers": {
+              "mandatory": ["command"]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'Finder.app'"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "^com\\.microsoft\\.rdc$",
+                "^com\\.microsoft\\.rdc\\.",
+                "^net\\.sf\\.cord$",
+                "^com\\.thinomenon\\.RemoteDesktopConnection$",
+                "^com\\.itap-mobile\\.qmote$",
+                "^com\\.nulana\\.remotixmac$",
+                "^com\\.p5sys\\.jump\\.mac\\.viewer$",
+                "^com\\.p5sys\\.jump\\.mac\\.viewer\\.",
+                "^com\\.teamviewer\\.TeamViewer$",
+                "^com\\.vmware\\.horizon$",
+                "^com\\.2X\\.Client\\.Mac$",
+                "^com\\.vmware\\.fusion$",
+                "^com\\.vmware\\.horizon$",
+                "^com\\.vmware\\.view$",
+                "^com\\.parallels\\.desktop$",
+                "^com\\.parallels\\.vm$",
+                "^com\\.parallels\\.desktop\\.console$",
+                "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
+                "^com\\.citrix\\.XenAppViewer$",
+                "^com\\.vmware\\.proxyApp\\.",
+                "^com\\.parallels\\.winapp\\."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "control + shift + esc = Activity Monitor",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "escape",
+            "modifiers": {
+              "mandatory": ["control", "shift"]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a 'Activity Monitor.app'"
+            }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_unless",
+              "bundle_identifiers": [
+                "^com\\.microsoft\\.rdc$",
+                "^com\\.microsoft\\.rdc\\.",
+                "^net\\.sf\\.cord$",
+                "^com\\.thinomenon\\.RemoteDesktopConnection$",
+                "^com\\.itap-mobile\\.qmote$",
+                "^com\\.nulana\\.remotixmac$",
+                "^com\\.p5sys\\.jump\\.mac\\.viewer$",
+                "^com\\.p5sys\\.jump\\.mac\\.viewer\\.",
+                "^com\\.teamviewer\\.TeamViewer$",
+                "^com\\.vmware\\.horizon$",
+                "^com\\.2X\\.Client\\.Mac$",
+                "^com\\.vmware\\.fusion$",
+                "^com\\.vmware\\.horizon$",
+                "^com\\.vmware\\.view$",
+                "^com\\.parallels\\.desktop$",
+                "^com\\.parallels\\.vm$",
+                "^com\\.parallels\\.desktop\\.console$",
+                "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
+                "^com\\.citrix\\.XenAppViewer$",
+                "^com\\.vmware\\.proxyApp\\.",
+                "^com\\.parallels\\.winapp\\."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "⏪ (back track) key should only control Spotify.",
+      "manipulators": [
+        {
+          "from": { "key_code": "f7" },
+          "to_if_alone": [
+            {
+              "shell_command": "osascript -e 'tell application \"Spotify\" to previous track'"
+            }
+          ],
+          "to_if_held_down": [
+            {
+              "shell_command": "osascript -e 'tell application \"Spotify\" to rewind'"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "⏯ (play/pause) key should only control Spotify.",
+      "manipulators": [
+        {
+          "from": { "key_code": "f8" },
+          "to": [
+            {
+              "shell_command": "osascript -e 'tell application \"Spotify\" to playpause'"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "⏩ (next track) key should only control Spotify.",
+      "manipulators": [
+        {
+          "from": { "key_code": "f9" },
+          "to_if_alone": [
+            {
+              "shell_command": "osascript -e 'tell application \"Spotify\" to next track'"
+            }
+          ],
+          "to_if_held_down": [
+            {
+              "shell_command": "osascript -e 'tell application \"Spotify\" to fast forward'"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "control + ⏪ (back track) key should only control Spotify.",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "f7",
+            "modifiers": {
+              "mandatory": ["control"]
+            }
+          },
+          "to_if_alone": [
+            {
+              "shell_command": "osascript -e 'tell application \"Spotify\" to previous track'"
+            }
+          ],
+          "to_if_held_down": [
+            {
+              "shell_command": "osascript -e 'tell application \"Spotify\" to rewind'"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "control + ⏯ (play/pause) key should only control Spotify.",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "f8",
+            "modifiers": {
+              "mandatory": ["control"]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "osascript -e 'tell application \"Spotify\" to playpause'"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "control + ⏩ (next track) key should only control Spotify.",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "f9",
+            "modifiers": {
+              "mandatory": ["control"]
+            }
+          },
+          "to_if_alone": [
+            {
+              "shell_command": "osascript -e 'tell application \"Spotify\" to next track'"
+            }
+          ],
+          "to_if_held_down": [
+            {
+              "shell_command": "osascript -e 'tell application \"Spotify\" to fast forward'"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}
