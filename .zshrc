@@ -22,14 +22,9 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-#
+
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
-
-# nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Set zinit directory
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -118,13 +113,13 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
-# shell integrations
-eval "$(fzf --zsh)"
-eval "$(thefuck --alias)"
-
 # variables
 export EDITOR=nvim
 export VISUAL=nvim
 export LANG=en_GB.UTF-8
 export LC_ALL=en_GB.UTF-8
 
+# shell integrations
+eval "$(fzf --zsh)"
+eval "$(thefuck --alias)"
+eval "$(fnm env --use-on-cd)"
