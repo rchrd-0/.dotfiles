@@ -1,6 +1,7 @@
 # source private
 source $HOME/.dot-private/.zshrc
 
+
 # PATH
 export XDG_CONFIG_HOME="$HOME/.config"
 export PATH="$PATH:$HOME/.composer/vendor/bin"
@@ -8,7 +9,6 @@ export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$HOME/.local/bin:$PATH
-export PATH=$PATH:$(go env GOPATH)/bin
 export PATH="$HOME/scripts:$PATH"
 export PATH=$HOME/console-ninja/.bin:$PATH
 # expo > 50
@@ -21,6 +21,11 @@ case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
+
+# Go
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+
 # pnpm end
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
@@ -52,7 +57,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # autoload
-autoload -U compinit && compinit
+# autoload -U compinit && compinit
+autoload -Uz compinit && compinit
 
 zinit cdreplay -q
 
@@ -78,6 +84,7 @@ alias np-b="bash docker/build.sh"
 alias np-d="npm run dev"
 alias air="~/.air"
 alias lg="lazygit"
+alias python=python3
 
 # functions
 tunnel() {
