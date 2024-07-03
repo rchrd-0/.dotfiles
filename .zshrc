@@ -1,7 +1,6 @@
 # source private
 source $HOME/.dot-private/.zshrc
 
-
 # PATH
 export XDG_CONFIG_HOME="$HOME/.config"
 export PATH="$PATH:$HOME/.composer/vendor/bin"
@@ -21,12 +20,11 @@ case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
+# pnpm end
 
 # Go
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
-
-# pnpm end
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
@@ -56,8 +54,16 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Add Homebrew zsh completion
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
+  # autoload -Uz compinit
+  # compinit
+fi
+
 # autoload
-# autoload -U compinit && compinit
 autoload -Uz compinit && compinit
 
 zinit cdreplay -q
@@ -101,6 +107,7 @@ bindkey '^n' history-search-forward
 bindkey '^[[1;3D' backward-word  # Alt+Left
 bindkey '^[[1;3C' forward-word   # Alt+Right
 bindkey -e
+bindkey '\e' autosuggest-clear
 
 # history
 HISTSIZE=5000
