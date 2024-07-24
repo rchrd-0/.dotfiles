@@ -3,6 +3,7 @@ source $HOME/.dot-private/.zshrc
 
 # PATH
 export XDG_CONFIG_HOME="$HOME/.config"
+export PATH="/opt/homebrew/bin:$PATH"
 export PATH="$PATH:$HOME/.composer/vendor/bin"
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
@@ -63,6 +64,12 @@ then
   # compinit
 fi
 
+. "$HOME/.asdf/asdf.sh"
+# append completions to fpath
+fpath=(${ASDF_DIR}/completions $fpath)
+
+# .zsh.d completions
+fpath=(~/.zsh.d/ $fpath)
 # autoload
 autoload -Uz compinit && compinit
 
@@ -90,7 +97,7 @@ alias np-b="bash docker/build.sh"
 alias np-d="npm run dev"
 alias air="~/.air"
 alias lg="lazygit"
-alias python=python3
+# alias python=python3
 
 # functions
 tunnel() {
@@ -137,3 +144,5 @@ export LC_ALL=en_GB.UTF-8
 eval "$(fzf --zsh)"
 eval "$(thefuck --alias)"
 eval "$(fnm env --use-on-cd)"
+# eval "$(zoxide init zsh)"
+
