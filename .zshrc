@@ -81,7 +81,7 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 zinit light z-shell/F-Sy-H
 zinit light Aloxaf/fzf-tab
-zinit load agkozak/zsh-z
+# zinit load agkozak/zsh-z
 
 # omz
 zinit snippet OMZP::git/git.plugin.zsh
@@ -144,5 +144,5 @@ export LC_ALL=en_GB.UTF-8
 eval "$(fzf --zsh)"
 eval "$(thefuck --alias)"
 eval "$(fnm env --use-on-cd)"
-# eval "$(zoxide init zsh)"
+eval "$(zoxide init zsh)"
 
