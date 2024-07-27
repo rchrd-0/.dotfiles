@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ -z "$TMUX" ]; then
+    echo "must be run inside tmux"
+    exit 1
+fi
+
+session=$(tmux list-sessions -F "#{session_name}#{?session_attached, · current,}" | \
+  fzf --reverse \
+  --prompt="Go to session: " \
+  --preview="tmux list-windows -t '{1}'" \
+)
+# --preview-window=right:50% \
+
+if [[ -n $session ]]; then
+  # remove current prefix if present
+  session_name=${session% · current}
+  tmux switch-client -t "$session_name"
+fi
