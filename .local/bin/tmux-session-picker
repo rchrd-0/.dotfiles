@@ -10,10 +10,11 @@ session=$(tmux list-sessions -F "#{session_name}#{?session_attached, · current,
   --prompt="Go to session: " \
   --preview="tmux list-windows -t '{1}'" \
 )
-# --preview-window=right:50% \
 
 if [[ -n $session ]]; then
   # remove current prefix if present
-  session_name=${session% · current}
+  session_name=${session% *}
   tmux switch-client -t "$session_name"
 fi
+
+exit 0
