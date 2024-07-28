@@ -31,12 +31,6 @@ path=(
 )
 export PATH
 
-# homebrew completions
-if type brew &>/dev/null
-then
-      FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-fi
-
 # zinit setup
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 if [ ! -d "$ZINIT_HOME" ]; then
@@ -45,21 +39,37 @@ if [ ! -d "$ZINIT_HOME" ]; then
 fi
 source "${ZINIT_HOME}/zinit.zsh"
 
+# completions
+fpath=(~/.zsh.d $fpath)
+
+# brew completions
+if type brew &>/dev/null; then
+    fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
+fi
+
+# source asdf
+if [[ -f "$HOME/.asdf/asdf.sh" ]]; then
+    . "$HOME/.asdf/asdf.sh"
+    # asdf completions
+    fpath=(${ASDF_DIR}/completions $fpath)
+fi
+
+# load completions
+autoload -Uz compinit && compinit
+zinit cdreplay -q
+
 # zinit plugins, snippets
 zinit ice depth=1; zinit light romkatv/powerlevel10k
+zinit light Aloxaf/fzf-tab
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 zinit light z-shell/F-Sy-H
-zinit light Aloxaf/fzf-tab
-# zinit load agkozak/zsh-z
 zinit snippet OMZP::git/git.plugin.zsh
 zinit snippet OMZL::directories.zsh
 zinit snippet OMZL::theme-and-appearance.zsh
 
-# completions
-fpath=(${ASDF_DIR}/completions ~/.zsh.d/ $fpath)
-autoload -Uz compinit && compinit
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # zinit completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z-a-z}'
@@ -98,12 +108,7 @@ bindkey -e
 bindkey '\e' autosuggest-clear
 
 # tools and integrations integrations
-. "$HOME/.asdf/asdf.sh"
 eval "$(fzf --zsh)"
 eval "$(thefuck --alias)"
 eval "$(fnm env --use-on-cd)"
 eval "$(zoxide init zsh)"
-
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-zinit cdreplay -q
