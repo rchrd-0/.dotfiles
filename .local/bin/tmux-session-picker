@@ -5,17 +5,31 @@ if [ -z "$TMUX" ]; then
     exit 1
 fi
 
+# session=$(tmux list-sessions -F "#{session_name}#{?session_attached, · current,}" | \
+#   fzf --reverse \
+#   --prompt="Go to session: " \
+#   --preview="tmux list-windows -t '{1}'" \
+#   --preview-window=hidden
+# )
+
+# if [[ -n $session ]]; then
+#   # remove current prefix if present
+#   session_name=${session% *}
+#   tmux switch-client -t "$session_name"
+# fi
+
 session=$(tmux list-sessions -F "#{session_name}#{?session_attached, · current,}" | \
+  nl -w2 -s'] ' | sed 's/^/[/' | sed 's/\[ /[/' | \
   fzf --reverse \
   --prompt="Go to session: " \
-  --preview="tmux list-windows -t '{1}'" \
+  --preview="echo {} | sed 's/^\[[0-9]*\] //' | sed 's/ · current$//' | xargs -I {} tmux list-windows -t {}" \
+  --preview-window=hidden
 )
-# --preview-window=right:50% \
-
 if [[ -n $session ]]; then
-  # remove current prefix if present
-  session_name=${session% *}
+  # get session name by removing the [number] prefix and the ' · current' suffix if present
+  session_name=$(echo "$session" | sed 's/^\[[0-9]*\] //; s/ · current$//')
   tmux switch-client -t "$session_name"
 fi
+
 
 exit 0
