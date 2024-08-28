@@ -101,9 +101,10 @@ setopt hist_ignore_dups
 alias cat=bat
 alias a-s="php artisan serve"
 alias a-t="php artisan tinker"
+alias d-b="bash docker/build.sh"
 alias np-w="npm run watch"
-alias np-b="bash docker/build.sh"
 alias np-d="npm run dev"
+alias np-s="npm run start"
 alias air="~/.air"
 alias lg="lazygit"
 

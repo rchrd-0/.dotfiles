@@ -1,5 +1,28 @@
 export PATH="$PATH:$HOME/Library/Application Support/JetBrains/Toolbox/scripts/"
 
+# kanagawa fzf
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+  --highlight-line \
+  --info=inline-right \
+  --ansi \
+  --layout=reverse \
+  --border=none \
+  --color=bg+:#2A2A37 \
+  --color=bg:#1F1F28 \
+  --color=border:#7E9CD8 \
+  --color=fg:#DCD7BA \
+  --color=gutter:#1F1F28 \
+  --color=header:#FF9E3B \
+  --color=hl+:#7AA89F \
+  --color=hl:#7AA89F \
+  --color=info:#727169 \
+  --color=marker:#E46876 \
+  --color=pointer:#E46876 \
+  --color=prompt:#7AA89F \
+  --color=query:#DCD7BA:regular \
+  --color=scrollbar:#7E9CD8 \
+  --color=separator:#FF9E3B \
+  --color=spinner:#E46876"
 
 # rose-pine fzf
 # export FZF_DEFAULT_OPTS="
@@ -11,35 +34,26 @@ export PATH="$PATH:$HOME/Library/Application Support/JetBrains/Toolbox/scripts/"
 # 	--layout=reverse"
 
 # tokyonight fzf
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
-  --highlight-line \
-  --info=inline-right \
-  --ansi \
-  --layout=reverse \
-  --border=none
-  --color=bg+:#283457 \
-  --color=bg:#16161e \
-  --color=border:#27a1b9 \
-  --color=fg:#c0caf5 \
-  --color=gutter:#16161e \
-  --color=header:#ff9e64 \
-  --color=hl+:#2ac3de \
-  --color=hl:#2ac3de \
-  --color=info:#545c7e \
-  --color=marker:#ff007c \
-  --color=pointer:#ff007c \
-  --color=prompt:#2ac3de \
-  --color=query:#c0caf5:regular \
-  --color=scrollbar:#27a1b9 \
-  --color=separator:#ff9e64 \
-  --color=spinner:#ff007c \
-"
-
-# catppuccin fzf
-# export FZF_DEFAULT_OPTS=" \
-# --highlight-line \
-# --info=inline-right \
-# --layout=reverse \
-# --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
-# --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
-# --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+# export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+#   --highlight-line \
+#   --info=inline-right \
+#   --ansi \
+#   --layout=reverse \
+#   --border=none
+#   --color=bg+:#283457 \
+#   --color=bg:#16161e \
+#   --color=border:#27a1b9 \
+#   --color=fg:#c0caf5 \
+#   --color=gutter:#16161e \
+#   --color=header:#ff9e64 \
+#   --color=hl+:#2ac3de \
+#   --color=hl:#2ac3de \
+#   --color=info:#545c7e \
+#   --color=marker:#ff007c \
+#   --color=pointer:#ff007c \
+#   --color=prompt:#2ac3de \
+#   --color=query:#c0caf5:regular \
+#   --color=scrollbar:#27a1b9 \
+#   --color=separator:#ff9e64 \
+#   --color=spinner:#ff007c \
+# "
