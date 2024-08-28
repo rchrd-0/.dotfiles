@@ -21,6 +21,10 @@ fi
 session=$(tmux list-sessions -F "#{session_name}#{?session_attached, · current,}" | \
   nl -w2 -s'] ' | sed 's/^/[/' | sed 's/\[ /[/' | \
   fzf --reverse \
+  --border \
+  --border-label="session picker" \
+  --border-label-pos=top \
+  --color=border:#DCD7BA \
   --prompt="Go to session: " \
   --preview="echo {} | sed 's/^\[[0-9]*\] //' | sed 's/ · current$//' | xargs -I {} tmux list-windows -t {}" \
   --preview-window=hidden
