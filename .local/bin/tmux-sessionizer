@@ -12,12 +12,12 @@ else
         sed -E "s;^$HOME/;;; s/^[0-9.]+\s+//" |
         fzf --no-sort \
         --border \
-        --border-label="sessionizer" \
-        --border-label-pos=top \
         --color=border:#DCD7BA |
         sed "s|^|$HOME/|"
     )
 fi
+# --border-label="sessionizer" \
+# --border-label-pos=top \
 
 if [[ -z $selected ]]; then
     exit 0
