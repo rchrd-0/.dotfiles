@@ -107,6 +107,7 @@ alias np-d="npm run dev"
 alias np-s="npm run start"
 alias air="~/.air"
 alias lg="lazygit"
+alias services="~/services"
 
 # keybindings
 bindkey '^p' history-search-backward
