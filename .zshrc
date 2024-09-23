@@ -16,17 +16,18 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export EDITOR=nvim
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
+
 export GOPATH=$HOME/go
 
 # PATH
 path=(
     /opt/homebrew/bin
     $HOME/.composer/vendor/bin
-    $ANDROID_HOME/emulator
-    $ANDROID_HOME/platform-tools
     $HOME/.local/bin
     $GOPATH/bin
     $HOME/.rvm/bin
+    $ANDROID_HOME/emulator
+    $ANDROID_HOME/platform-tools
     $path
 )
 export PATH
@@ -107,7 +108,8 @@ alias np-d="npm run dev"
 alias np-s="npm run start"
 alias air="~/.air"
 alias lg="lazygit"
-alias services="~/services"
+alias services="cd ~/services"
+alias tmux="tmux_smart"
 
 # keybindings
 bindkey '^p' history-search-backward

@@ -54,3 +54,10 @@ list_functions() {
     }'
 }
 
+tmux_smart() {
+    if [[ $# -eq 0 ]]; then
+        tmux attach || tmux new
+    else
+        command tmux "$@"
+    fi
+}
