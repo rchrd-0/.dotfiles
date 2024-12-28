@@ -1,0 +1,29 @@
+theme = Kanagawa Wave
+font-family = JetBrainsMonoNL Nerd Font Mono
+font-feature = -liga
+font-feature = -calt
+font-feature = -dlig
+font-size = 13
+font-thicken = true
+cursor-style = block
+cursor-style-blink = false
+mouse-hide-while-typing = true
+shell-integration = zsh
+shell-integration-features = no-cursor
+window-padding-x = 16
+window-padding-y = 10
+# window-decoration = false
+copy-on-select = clipboard
+macos-titlebar-style = transparent
+macos-window-shadow = true
+macos-icon = custom-style
+macos-icon-frame = plastic
+macos-icon-ghost-color = dcd7ba
+#macos-icon-screen-color = 1f1f28,16161d
+#macos-icon-screen-color = 223249,1f1f28
+#macos-icon-screen-color = 1f1f28,2D4F67
+macos-icon-screen-color = 1f1f28,6A9589
+macos-option-as-alt = true
+
+keybind = super+,=open_config
+#keybind = global:alt+`=toggle_quick_terminal
