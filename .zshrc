@@ -101,6 +101,7 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 
 # aliases
+alias vim="nvim"
 alias cat=bat
 alias a-s="php artisan serve"
 alias a-t="php artisan tinker"
