@@ -1,0 +1,14 @@
+import = ["~/.config/alacritty/kanagawa.toml"]
+
+[font]
+normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
+size = 14.0
+
+[window]
+# option_as_alt = "None"
+padding = { x = 16, y = 16 }
+# decorations = "transparent"
+
+# [env]
+# TERM = "xterm-256color"
+

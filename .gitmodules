@@ -1,0 +1,10 @@
+[submodule ".config/tmux/plugins/tpm"]
+	path = .config/tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm
+[submodule ".config/nvim"]
+	path = .config/nvim
+	url = git@github.com:rchrd-0/nvim.git
+	branch = rchrd
+[submodule ".dot-private"]
+	path = .dot-private
+	url = git@github.com:rchrd-0/.dot-private.git

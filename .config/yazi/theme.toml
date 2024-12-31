@@ -1,0 +1,3 @@
+# ya pack -a dangooddd/kanagawa
+[flavor]
+use = "kanagawa"
