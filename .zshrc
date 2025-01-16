@@ -18,8 +18,8 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export EDITOR=nvim
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
-
 export GOPATH=$HOME/go
+export BUN_INSTALL="$HOME/.bun"
 
 # PATH
 path=(
@@ -30,6 +30,7 @@ path=(
     $HOME/.rvm/bin
     $ANDROID_HOME/emulator
     $ANDROID_HOME/platform-tools
+    $BUN_INSTALL/bin
     $path
 )
 export PATH
@@ -57,12 +58,8 @@ if type brew &>/dev/null; then
     fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
 fi
 
-# source asdf
-if [[ -f "$HOME/.asdf/asdf.sh" ]]; then
-    . "$HOME/.asdf/asdf.sh"
-    # asdf completions
-    fpath=(${ASDF_DIR}/completions $fpath)
-fi
+# bun completions
+[ -s "/Users/rchrd/.bun/_bun" ] && source "/Users/rchrd/.bun/_bun"
 
 # load completions
 autoload -Uz compinit && compinit
@@ -126,13 +123,8 @@ bindkey '\e' autosuggest-clear
 # tools and integrations integrations
 eval "$(fzf --zsh)"
 eval "$(thefuck --alias)"
-eval "$(fnm env --use-on-cd)"
+# eval "$(fnm env --use-on-cd)"
 eval "$(zoxide init zsh)"
+eval "$(mise activate zsh)"
 
-# bun completions
-[ -s "/Users/rchrd/.bun/_bun" ] && source "/Users/rchrd/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
 . "/Users/rchrd/.deno/env"

@@ -1,0 +1,5 @@
+[tools]
+python = ['3.12.4']
+node = ['22.2']
+ruby = ['3.3.5']
+usage = "latest"

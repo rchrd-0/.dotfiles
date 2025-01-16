@@ -57,3 +57,7 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
 #   --color=separator:#ff9e64 \
 #   --color=spinner:#ff007c \
 # "
+
+# Added by OrbStack: command-line tools and integration
+# This won't be added again if you remove it.
+source ~/.orbstack/shell/init.zsh 2>/dev/null || :

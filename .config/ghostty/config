@@ -1,12 +1,16 @@
 theme = Kanagawa Wave
-font-family = JetBrainsMonoNL Nerd Font Mono
+# font-family = JetBrainsMonoNL Nerd Font Mono
+# font-family = BlexMono Nerd Font Mono
+font-family = CaskaydiaCove Nerd Font Mono
 font-feature = -liga
 font-feature = -calt
 font-feature = -dlig
-font-size = 13
+font-size = 14
+adjust-cell-height = 10%
 font-thicken = true
 cursor-style = block
 cursor-style-blink = false
+cursor-click-to-move = true
 mouse-hide-while-typing = true
 shell-integration = zsh
 shell-integration-features = no-cursor
@@ -17,13 +21,26 @@ copy-on-select = clipboard
 macos-titlebar-style = transparent
 macos-window-shadow = true
 macos-icon = custom-style
-macos-icon-frame = plastic
+macos-icon-frame = chrome
 macos-icon-ghost-color = dcd7ba
-#macos-icon-screen-color = 1f1f28,16161d
-#macos-icon-screen-color = 223249,1f1f28
-#macos-icon-screen-color = 1f1f28,2D4F67
-macos-icon-screen-color = 1f1f28,6A9589
-macos-option-as-alt = true
 
-keybind = super+,=open_config
-#keybind = global:alt+`=toggle_quick_terminal
+#sumiInk0
+#macos-icon-screen-color = 1f1f28,16161d
+
+#sumiInk1
+#macos-icon-screen-color = 223249,1f1f28
+
+#waveBlue2
+#macos-icon-screen-color = 1f1f28,2D4F67
+
+#waveAqua1
+#macos-icon-screen-color = 1f1f28,6A9589
+
+#dragonBlue
+macos-icon-screen-color = 1f1f28,658594
+
+macos-option-as-alt = true
+quick-terminal-position = top
+quick-terminal-animation-duration = 0
+
+keybind = global:cmd+shift+`=toggle_quick_terminal
