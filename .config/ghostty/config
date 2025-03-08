@@ -1,12 +1,16 @@
-theme = Kanagawa Wave
-# font-family = JetBrainsMonoNL Nerd Font Mono
+# theme = Kanagawa Wave
+# theme = rose-pine
+theme = tokyonight_night
+font-family = JetBrainsMonoNL Nerd Font Mono
+# font-family = GeistMono Nerd Font Mono
 # font-family = BlexMono Nerd Font Mono
-font-family = CaskaydiaCove Nerd Font Mono
+# font-family = CaskaydiaCove Nerd Font Mono
 font-feature = -liga
 font-feature = -calt
 font-feature = -dlig
 font-size = 14
-adjust-cell-height = 10%
+adjust-cell-height = 0%
+# adjust-cell-height = 0%
 font-thicken = true
 cursor-style = block
 cursor-style-blink = false
@@ -14,6 +18,7 @@ cursor-click-to-move = true
 mouse-hide-while-typing = true
 shell-integration = zsh
 shell-integration-features = no-cursor
+link-url = true
 window-padding-x = 16
 window-padding-y = 10
 # window-decoration = false
@@ -21,6 +26,7 @@ copy-on-select = clipboard
 macos-titlebar-style = transparent
 macos-window-shadow = true
 macos-icon = custom-style
+# macos-icon = holographic
 macos-icon-frame = chrome
 macos-icon-ghost-color = dcd7ba
 
@@ -44,3 +50,5 @@ quick-terminal-position = top
 quick-terminal-animation-duration = 0
 
 keybind = global:cmd+shift+`=toggle_quick_terminal
+# keybind = alt+left=unbind
+# keybind = alt+right=unbind

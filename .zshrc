@@ -1,8 +1,7 @@
-# Add deno completions to search path
+# completiosn -> fpath
 if [[ ":$FPATH:" != *":/Users/rchrd/.zsh/completions:"* ]]; then export FPATH="/Users/rchrd/.zsh/completions:$FPATH"; fi
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
+
+# p10k instant prompt
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -58,9 +57,6 @@ if type brew &>/dev/null; then
     fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
 fi
 
-# bun completions
-[ -s "/Users/rchrd/.bun/_bun" ] && source "/Users/rchrd/.bun/_bun"
-
 # load completions
 autoload -Uz compinit && compinit
 zinit cdreplay -q
@@ -75,6 +71,7 @@ zinit light z-shell/F-Sy-H
 zinit snippet OMZP::git/git.plugin.zsh
 zinit snippet OMZL::directories.zsh
 zinit snippet OMZL::theme-and-appearance.zsh
+# zinit ice depth=1; zinit light jeffreytse/zsh-vi-mode
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -82,6 +79,7 @@ zinit snippet OMZL::theme-and-appearance.zsh
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z-a-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
+zstyle ':completion:*' complete-options false
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
@@ -105,26 +103,29 @@ alias a-t="php artisan tinker"
 alias d-b="bash docker/build.sh"
 alias np-w="npm run watch"
 alias np-d="npm run dev"
+alias np-b="npm run build"
 alias np-s="npm run start"
 alias air="~/.air"
 alias lg="lazygit"
 alias services="cd ~/services"
 alias tmux="tmux_smart"
 alias gbsc="git branch --show-current"
+alias lazyvim='NVIM_APPNAME="lazyvim" nvim'
 
 # keybindings
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^[[1;3D' backward-word  # Alt+Left
 bindkey '^[[1;3C' forward-word   # Alt+Right
+bindkey '^[k' kill-line
+bindkey '^[u' backward-kill-line
 bindkey -e
 bindkey '\e' autosuggest-clear
 
-# tools and integrations integrations
+# tools and integrations 
 eval "$(fzf --zsh)"
 eval "$(thefuck --alias)"
-# eval "$(fnm env --use-on-cd)"
 eval "$(zoxide init zsh)"
 eval "$(mise activate zsh)"
 
-. "/Users/rchrd/.deno/env"
+[ -f "$HOME/.deno/env" ] && source "$HOME/.deno/env"
