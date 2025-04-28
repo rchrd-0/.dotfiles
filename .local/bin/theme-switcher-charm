@@ -1,0 +1,259 @@
+#!/bin/bash
+
+# Theme Switcher with Charm-cli styling
+# Usage: theme-switcher-charm [theme_name]
+# If no theme name is provided, an FZF picker will be shown
+
+# Check if gum is installed for fancy output
+if ! command -v gum &> /dev/null; then
+  echo "This script requires Gum to be installed."
+  echo "Install it with: brew install gum"
+  echo "Falling back to regular theme-switcher..."
+  ~/.local/bin/theme-switcher "$@"
+  exit $?
+fi
+
+# Function to print styled text
+print_styled() {
+  gum style --foreground "$2" "$1"
+}
+
+# Function to print header
+print_header() {
+  echo
+  gum style --border normal --margin "1" --padding "1 2" --border-foreground "#33B1FF" "Theme Switcher"
+  echo
+}
+
+# Function to print section
+print_section() {
+  echo
+  gum style --bold --foreground "#3DDBD9" "$1"
+}
+
+# Function to print success
+print_success() {
+  gum style --foreground "#7ee787" "✓ $1"
+}
+
+# Function to print info
+print_info() {
+  gum style --foreground "#58a6ff" "ℹ $1"
+}
+
+# Available themes (short names for internal use)
+VALID_THEMES=("carbonfox" "kanagawa" "tokyo" "nightfox" "terafox" "duskfox" "rose")
+
+# Default theme if none specified and FZF selection is canceled
+DEFAULT_THEME="kanagawa"
+
+print_header
+
+# If no argument is provided, use FZF or Gum to select a theme
+if [ -z "$1" ]; then
+  # Get current theme if available
+  CURRENT_THEME=""
+  if [ -f "$HOME/.config/fzf/current_theme" ]; then
+    CURRENT_THEME=$(cat "$HOME/.config/fzf/current_theme")
+  fi
+  
+  print_section "Select Theme"
+  print_info "Current theme: ${CURRENT_THEME:-unknown}"
+  echo
+  
+  # Use Gum choose for theme selection
+  THEME_DISPLAY=(
+    "kanagawa"
+    "tokyonight (tokyo)"
+    "nightfox"
+    "carbonfox"
+    "duskfox"
+    "terafox"
+    "rose-pine (rose)"
+  )
+  
+  SELECTED=$(gum choose --height=10 --cursor.foreground="#3DDBD9" --item.foreground="#f2f4f8" "${THEME_DISPLAY[@]}")
+  
+  # If no theme was selected, exit
+  if [ -z "$SELECTED" ]; then
+    print_info "Theme selection canceled."
+    exit 0
+  fi
+  
+  # Extract the short name from the selection (between parentheses if present)
+  if [[ $SELECTED == *"("*")"* ]]; then
+    THEME=$(echo "$SELECTED" | sed -E 's/.*\(([^)]+)\).*/\1/')
+  else
+    THEME="$SELECTED"
+  fi
+else
+  THEME="$1"
+fi
+
+# Validate theme
+THEME_VALID=0
+for valid_theme in "${VALID_THEMES[@]}"; do
+  if [ "$THEME" = "$valid_theme" ]; then
+    THEME_VALID=1
+    break
+  fi
+done
+
+if [ $THEME_VALID -eq 0 ]; then
+  print_styled "Invalid theme: $THEME" "red"
+  print_styled "Available themes: ${VALID_THEMES[*]}" "yellow"
+  exit 1
+fi
+
+print_styled "Switching to theme: $THEME" "#f0883e"
+echo
+
+# Show a spinner while updating configurations
+print_section "Updating Configurations"
+
+# Update FZF theme
+gum spin --spinner dot --title "Updating FZF theme..." -- bash -c "
+  echo \"$THEME\" > \"$HOME/.config/fzf/current_theme\"
+  source \"$HOME/.config/fzf/theme.sh\" \"$THEME\"
+  sleep 0.5
+"
+print_success "FZF theme updated"
+
+# Update tmux theme
+if [ -f "$HOME/.config/tmux/tmux.conf" ]; then
+  # For kanagawa theme, set flavor to "wave"
+  if [ "$THEME" = "kanagawa" ]; then
+    TMUX_FLAVOR="wave"
+  else
+    TMUX_FLAVOR="$THEME"
+  fi
+  
+  gum spin --spinner dot --title "Updating tmux configuration..." -- bash -c "
+    sed -i '' \"s/^set -g @kanagawa_flavor.*$/set -g @kanagawa_flavor \\\"$TMUX_FLAVOR\\\"/\" \"$HOME/.config/tmux/tmux.conf\"
+    sleep 0.5
+  "
+  
+  # Reload tmux config if tmux is running
+  if command -v tmux &> /dev/null && tmux list-sessions &> /dev/null; then
+    gum spin --spinner dot --title "Reloading tmux..." -- bash -c "
+      tmux source-file \"$HOME/.config/tmux/tmux.conf\"
+      sleep 0.5
+    "
+    print_success "Tmux configuration updated and reloaded"
+  else
+    print_success "Tmux configuration updated (not running, so not reloaded)"
+  fi
+fi
+
+# Update ghostty theme
+if [ -f "$HOME/.config/ghostty/config" ]; then
+  # Map theme names to ghostty theme names
+  GHOSTTY_THEME=""
+  case "$THEME" in
+    "kanagawa")
+      GHOSTTY_THEME="Kanagawa Wave"
+      ;;
+    "tokyo")
+      GHOSTTY_THEME="tokyonight_night"
+      ;;
+    "rose")
+      GHOSTTY_THEME="rose-pine"
+      ;;
+    *)
+      GHOSTTY_THEME="$THEME"
+      ;;
+  esac
+  
+  gum spin --spinner dot --title "Updating ghostty configuration..." -- bash -c "
+    # Update the theme in ghostty config using a temporary file approach
+    # This works even if the config is a symlink or special file
+    GHOSTTY_CONFIG=\"$HOME/.config/ghostty/config\"
+    TEMP_CONFIG=\$(mktemp)
+    
+    # Create a new config with the updated theme
+    if [ -f \"\$GHOSTTY_CONFIG\" ]; then
+      cat \"\$GHOSTTY_CONFIG\" | sed \"s/^theme =.*\$/theme = \\\"$GHOSTTY_THEME\\\"/\" > \"\$TEMP_CONFIG\"
+      # Replace the original file with the new one
+      cat \"\$TEMP_CONFIG\" > \"\$GHOSTTY_CONFIG\"
+      rm \"\$TEMP_CONFIG\"
+    fi
+    sleep 0.5
+  "
+  print_success "Ghostty configuration updated"
+fi
+
+# Update lazygit theme
+if [ -d "$HOME/.config/lazygit/themes" ]; then
+  # Map theme names to lazygit theme file names
+  LAZYGIT_THEME=""
+  case "$THEME" in
+    "kanagawa")
+      LAZYGIT_THEME="kanagawa"
+      ;;
+    "tokyo")
+      LAZYGIT_THEME="tokyonight"
+      ;;
+    "rose")
+      LAZYGIT_THEME="rose-pine"
+      ;;
+    *)
+      LAZYGIT_THEME="$THEME"
+      ;;
+  esac
+  
+  # Check if the theme file exists
+  THEME_FILE="$HOME/.config/lazygit/themes/$LAZYGIT_THEME.yml"
+  if [ -f "$THEME_FILE" ]; then
+    gum spin --spinner dot --title "Updating lazygit configuration..." -- bash -c "
+      # Copy the theme file to the config location
+      cp \"$THEME_FILE\" \"$HOME/.config/lazygit/config.yml\"
+      sleep 0.5
+    "
+    print_success "Lazygit configuration updated to $LAZYGIT_THEME theme"
+  else
+    print_styled "Lazygit theme file not found: $THEME_FILE" "yellow"
+  fi
+else
+  print_styled "Lazygit themes directory not found. Create it at ~/.config/lazygit/themes/" "yellow"
+fi
+
+echo
+print_section "Next Steps"
+print_info "Themes applied. Re-source ghostty with ⌘⇧,"
+
+# Update Neovim colorscheme in init.lua
+if [ -f "$HOME/.config/nvim/init.lua" ]; then
+  # Map theme names to Neovim colorscheme names
+  NVIM_THEME=""
+  case "$THEME" in
+    "tokyo")
+      NVIM_THEME="tokyonight"
+      ;;
+    "rose")
+      NVIM_THEME="rose-pine"
+      ;;
+    *)
+      NVIM_THEME="$THEME"
+      ;;
+  esac
+  
+  gum spin --spinner dot --title "Updating Neovim colorscheme..." -- bash -c "
+    # Update the colorscheme line in init.lua
+    sed -i '' \"s/vim.cmd.colorscheme '.*'/vim.cmd.colorscheme '$NVIM_THEME'/\" \"$HOME/.config/nvim/init.lua\"
+    sleep 0.5
+  "
+  print_success "Neovim colorscheme updated to $NVIM_THEME"
+else
+  print_styled "Neovim init.lua file not found" "yellow"
+fi
+
+# Commented out old Neovim prompt code
+# if gum confirm "Do you want to open the Neovim colorscheme file to update it?"; then
+#   nvim "$HOME/.config/nvim/lua/custom/plugins/colorscheme.lua"
+# else
+#   print_info "Nvim needs to be updated manually."
+# fi
+
+# Final message
+echo
+gum style --border normal --margin "1" --padding "1 2" --border-foreground "#7ee787" "Theme switching complete!" 

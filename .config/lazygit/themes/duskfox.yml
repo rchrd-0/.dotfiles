@@ -1,28 +1,29 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/jesseduffield/lazygit/master/schema/config.json
 gui:
   nerdFontsVersion: "3"
-  theme:
+  theme: # duskfox
     activeBorderColor:
-      - "#3DDBD9" # orange (turquoise)
+      - "#ea9a97" # orange
       - "bold"
     inactiveBorderColor:
-      - "#33B1FF" # cyan
+      - "#9ccfd8" # cyan
     searchingActiveBorderColor:
-      - "#3DDBD9" # orange (turquoise)
+      - "#ea9a97" # orange
       - "bold"
     optionsTextColor:
-      - "#78A9FF" # blue
+      - "#569fba" # blue
     selectedLineBgColor:
-      - "#2a2a2a" # sel0 - popup bg, visual selection bg
+      - "#433c59" # sel0 - popup bg, visual selection bg
     cherryPickedCommitFgColor:
-      - "#78A9FF" # blue
+      - "#569fba" # blue
     cherryPickedCommitBgColor:
-      - "#BE95FF" # magenta
+      - "#c4a7e7" # magenta
     markedBaseCommitFgColor:
-      - "#78A9FF" # blue
+      - "#569fba" # blue
     markedBaseCommitBgColor:
-      - "#08BDBA" # yellow (teal)
+      - "#f6c177" # yellow
     unstagedChangesColor:
-      - "#EE5396" # red
+      - "#eb6f92" # red
     defaultFgColor:
-      - "#f2f4f8" # fg1 
+      - "#e0def4" # fg1
+
