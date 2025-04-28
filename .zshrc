@@ -19,7 +19,7 @@ export ANDROID_HOME=$HOME/Library/Android/sdk
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
 export GOPATH=$HOME/go
 export BUN_INSTALL="$HOME/.bun"
-export RIPGREP_CONFIG_PATH=$HOME/.config/rg/.rgrc
+export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/.ripgreprc
 
 # PATH
 path=(
