@@ -1,4 +1,4 @@
-# completiosn -> fpath
+# completions -> fpath
 if [[ ":$FPATH:" != *":/Users/rchrd/.zsh/completions:"* ]]; then export FPATH="/Users/rchrd/.zsh/completions:$FPATH"; fi
 
 # p10k instant prompt
@@ -19,6 +19,7 @@ export ANDROID_HOME=$HOME/Library/Android/sdk
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
 export GOPATH=$HOME/go
 export BUN_INSTALL="$HOME/.bun"
+export RIPGREP_CONFIG_PATH=$HOME/.config/rg/.rgrc
 
 # PATH
 path=(
@@ -30,6 +31,7 @@ path=(
     $ANDROID_HOME/emulator
     $ANDROID_HOME/platform-tools
     $BUN_INSTALL/bin
+    $HOME/.codeium/windsurf/bin
     $path
 )
 export PATH
@@ -52,7 +54,7 @@ source "${ZINIT_HOME}/zinit.zsh"
 # completions
 fpath=(~/.zsh.d $fpath)
 
-# brew completions
+# # brew completions
 if type brew &>/dev/null; then
     fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
 fi
@@ -105,22 +107,29 @@ alias np-w="npm run watch"
 alias np-d="npm run dev"
 alias np-b="npm run build"
 alias np-s="npm run start"
+alias np-l="npm run lint"
+alias np-f="npm run format"
 alias air="~/.air"
 alias lg="lazygit"
 alias services="cd ~/services"
 alias tmux="tmux_smart"
 alias gbsc="git branch --show-current"
 alias lazyvim='NVIM_APPNAME="lazyvim" nvim'
+alias theme='~/.local/bin/theme-switcher'
+alias themeC='~/.local/bin/theme-switcher-charm'
 
 # keybindings
+bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^[[1;3D' backward-word  # Alt+Left
 bindkey '^[[1;3C' forward-word   # Alt+Right
 bindkey '^[k' kill-line
 bindkey '^[u' backward-kill-line
-bindkey -e
 bindkey '\e' autosuggest-clear
+
+# Load FZF theme
+[ -f "$HOME/.config/fzf/theme.sh" ] && source "$HOME/.config/fzf/theme.sh"
 
 # tools and integrations 
 eval "$(fzf --zsh)"
