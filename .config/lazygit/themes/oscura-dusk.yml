@@ -1,0 +1,28 @@
+gui:
+  nerdFontsVersion: "3"
+  theme:
+    activeBorderColor:
+      - "#D6D876"  # orange/yellow badge background (bright, warm)
+      - "bold"
+    inactiveBorderColor:
+      - "#868F97"  # muted gray for inactive borders/text
+    searchingActiveBorderColor:
+      - "#D6D876"  # same as active border (yellow)
+      - "bold"
+    optionsTextColor:
+      - "#479FFA"  # cyan / bright blue for options text
+    selectedLineBgColor:
+      - "#5A5B63"  # muted dark gray for selected line background
+    cherryPickedCommitFgColor:
+      - "#479FFA"  # cyan / bright blue for cherry picked commit text
+    cherryPickedCommitBgColor:
+      - "#868F97"  # muted gray for cherry picked commit background
+    markedBaseCommitFgColor:
+      - "#479FFA"  # cyan for marked base commit text
+    markedBaseCommitBgColor:
+      - "#E6E7A3"  # light yellow for marked base commit background
+    unstagedChangesColor:
+      - "#D84F68"  # red for unstaged changes (errors/deletions)
+    defaultFgColor:
+      - "#E6E6E6"  # default foreground text color (light gray)
+

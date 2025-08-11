@@ -104,6 +104,7 @@
                     },
                     {
                         "description": "shift + delete = forward delete",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {

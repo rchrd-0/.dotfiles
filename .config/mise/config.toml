@@ -3,3 +3,7 @@ python = ['3.12.4']
 node = ['23']
 ruby = ['3.3.5']
 usage = "latest"
+uv = "latest"
+bun = "latest"
+deno = "latest"
+pnpm = "latest"

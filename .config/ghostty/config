@@ -1,15 +1,19 @@
-theme = "carbonfox"
+theme = "rose-pine"
 
-font-family = JetBrainsMonoNL Nerd Font Mono
+# font-family = JetBrainsMonoNL Nerd Font Mono
+# font-family = Iosevka Nerd Font Mono
 # font-family = CaskaydiaCove Nerd Font Mono
+font-family = TX02 Nerd Font
+# font-family = 0xProto Nerd Font Mono
+# font-family = DepartureMono Nerd Font
 # font-family = BlexMono Nerd Font Mono
-# font-family = MonaspiceNe Nerd Font Mono
 
 font-feature = -liga
+font-feature = -dlig
 font-feature = -calt
 font-feature = +cv14
 
-font-size = 13
+font-size = 14
 # adjust-cell-height = 10%
 font-thicken = true
 # font-thicken-strength = 255

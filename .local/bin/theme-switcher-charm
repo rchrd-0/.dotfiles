@@ -42,7 +42,7 @@ print_info() {
 }
 
 # Available themes (short names for internal use)
-VALID_THEMES=("carbonfox" "kanagawa" "tokyo" "nightfox" "terafox" "duskfox" "rose")
+VALID_THEMES=("carbonfox" "kanagawa" "tokyo" "nightfox" "terafox" "duskfox" "rose" "oscura")
 
 # Default theme if none specified and FZF selection is canceled
 DEFAULT_THEME="kanagawa"
@@ -70,6 +70,7 @@ if [ -z "$1" ]; then
     "duskfox"
     "terafox"
     "rose-pine (rose)"
+    "oscura-dusk (oscura)"
   )
   
   SELECTED=$(gum choose --height=10 --cursor.foreground="#3DDBD9" --item.foreground="#f2f4f8" "${THEME_DISPLAY[@]}")
@@ -159,6 +160,9 @@ if [ -f "$HOME/.config/ghostty/config" ]; then
     "rose")
       GHOSTTY_THEME="rose-pine"
       ;;
+    "oscura")
+      GHOSTTY_THEME="oscura-dusk"
+      ;;
     *)
       GHOSTTY_THEME="$THEME"
       ;;
@@ -195,6 +199,9 @@ if [ -d "$HOME/.config/lazygit/themes" ]; then
       ;;
     "rose")
       LAZYGIT_THEME="rose-pine"
+      ;;
+    "oscura")
+      LAZYGIT_THEME="oscura-dusk"
       ;;
     *)
       LAZYGIT_THEME="$THEME"

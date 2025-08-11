@@ -32,9 +32,14 @@ path=(
     $ANDROID_HOME/platform-tools
     $BUN_INSTALL/bin
     $HOME/.codeium/windsurf/bin
+    $HOME/.config/herd-lite/bin
     $path
 )
 export PATH
+
+# export PATH="/Users/rchrd/.config/herd-lite/bin:$PATH"
+export PHP_INI_SCAN_DIR="/Users/rchrd/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
+
 
 # pnpm
 export PNPM_HOME="/Users/rchrd/Library/pnpm"
@@ -66,7 +71,7 @@ zinit cdreplay -q
 # zinit plugins, snippets
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 zinit light Aloxaf/fzf-tab
-zinit light zsh-users/zsh-syntax-highlighting
+# zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 zinit light z-shell/F-Sy-H
@@ -74,6 +79,8 @@ zinit snippet OMZP::git/git.plugin.zsh
 zinit snippet OMZL::directories.zsh
 zinit snippet OMZL::theme-and-appearance.zsh
 # zinit ice depth=1; zinit light jeffreytse/zsh-vi-mode
+
+zle_highlight=(paste:special)
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -96,6 +103,7 @@ setopt hist_ignore_space
 setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_ignore_dups
+setopt extendedglob globdots
 
 # aliases
 alias vim="nvim"
@@ -136,5 +144,7 @@ eval "$(fzf --zsh)"
 eval "$(thefuck --alias)"
 eval "$(zoxide init zsh)"
 eval "$(mise activate zsh)"
+# eval "$(starship init zsh)"
+# eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/rchrd.json)"
 
 [ -f "$HOME/.deno/env" ] && source "$HOME/.deno/env"
