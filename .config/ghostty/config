@@ -1,9 +1,8 @@
 theme = "rose-pine"
 
 # font-family = JetBrainsMonoNL Nerd Font Mono
-# font-family = Iosevka Nerd Font Mono
-# font-family = CaskaydiaCove Nerd Font Mono
 font-family = TX02 Nerd Font
+# font-family = CaskaydiaCove Nerd Font Mono
 # font-family = 0xProto Nerd Font Mono
 # font-family = DepartureMono Nerd Font
 # font-family = BlexMono Nerd Font Mono
@@ -36,20 +35,10 @@ macos-icon-ghost-color = dcd7ba
 background-opacity = 1
 background-blur = 20
 
-#sumiInk0
-#macos-icon-screen-color = 1f1f28,16161d
-
-#sumiInk1
-#macos-icon-screen-color = 223249,1f1f28
-
-#waveBlue2
-#macos-icon-screen-color = 1f1f28,2D4F67
-
-#waveAqua1
-#macos-icon-screen-color = 1f1f28,6A9589
-
 #dragonBlue
-macos-icon-screen-color = 1f1f28,658594
+# macos-icon-screen-color = 1f1f28,658594
+
+macos-icon-screen-color = 1f1d2e,31748f
 
 macos-option-as-alt = true
 quick-terminal-position = top
