@@ -19,8 +19,8 @@ syntax on
 set novisualbell
 set laststatus=2
 set noshowmode
-set number relativenumber
-set nu rnu
+" set number relativenumber
+" set nu rnu
 set shiftwidth=4
 set incsearch
 set ignorecase

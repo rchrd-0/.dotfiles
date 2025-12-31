@@ -104,6 +104,7 @@
                     },
                     {
                         "description": "shift + delete = forward delete",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -299,6 +300,24 @@
                         "vendor_id": 1452
                     },
                     "ignore": true
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": true,
+                        "product_id": 99,
+                        "vendor_id": 65534
+                    },
+                    "ignore": false
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": true,
+                        "product_id": 65278,
+                        "vendor_id": 3141
+                    },
+                    "ignore": false
                 }
             ],
             "fn_function_keys": [

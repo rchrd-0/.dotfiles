@@ -1,0 +1,12 @@
+#!/bin/bash
+
+bun remove @eslint/js eslint eslint-plugin-react-hooks eslint-plugin-react-refresh typescript-eslint
+rm eslint.config.js
+
+bun i
+bun add -D -E @biomejs/biome
+bunx --bun biome init
+
+cp -a ~/Documents/development/work/ks/scaffold/ .
+
+echo "finished setup_ks_fe"

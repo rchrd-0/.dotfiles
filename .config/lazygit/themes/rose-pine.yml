@@ -25,4 +25,4 @@ gui:
     unstagedChangesColor:
       - "#eb6f92" # love
     defaultFgColor:
-      - "#e0def4" # text
+      - "#e0def4" # text 

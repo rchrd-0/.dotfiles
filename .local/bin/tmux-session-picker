@@ -1,8 +1,8 @@
 #!/bin/bash
 
 if [ -z "$TMUX" ]; then
-    echo "must be run inside tmux"
-    exit 1
+  echo "must be run inside tmux"
+  exit 1
 fi
 
 # session=$(tmux list-sessions -F "#{session_name}#{?session_attached, · current,}" | \
@@ -18,14 +18,14 @@ fi
 #   tmux switch-client -t "$session_name"
 # fi
 
-session=$(tmux list-sessions -F "#{session_name}#{?session_attached, · current,}" | \
-  nl -w2 -s'] ' | sed 's/^/[/' | sed 's/\[ /[/' | \
-  fzf --reverse \
-  --border \
-  --color=border:#DCD7BA \
-  --prompt="Go to session: " \
-  --preview="echo {} | sed 's/^\[[0-9]*\] //' | sed 's/ · current$//' | xargs -I {} tmux list-windows -t {}" \
-  --preview-window=hidden
+session=$(
+  tmux list-sessions -F "#{session_name}#{?session_attached, · current,}" |
+    nl -w2 -s'] ' | sed 's/^/[/' | sed 's/\[ /[/' |
+    fzf --reverse \
+      --border \
+      --prompt="Go to session: " \
+      --preview="echo {} | sed 's/^\[[0-9]*\] //' | sed 's/ · current$//' | xargs -I {} tmux list-windows -t {}" \
+      --preview-window=hidden
 )
 # --border-label="session picker" \
 # --border-label-pos=top \
@@ -34,6 +34,5 @@ if [[ -n $session ]]; then
   session_name=$(echo "$session" | sed 's/^\[[0-9]*\] //; s/ · current$//')
   tmux switch-client -t "$session_name"
 fi
-
 
 exit 0
