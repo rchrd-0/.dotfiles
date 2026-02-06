@@ -1,43 +1,72 @@
-#!/bin/bash
+#!/usr/bin/env zsh
+#
+# FZF theme manager
+#
+# Usage:
+#   source ~/.config/fzf/theme.sh [theme_name]
+#
+# If no theme is provided:
+#   1. Use the last saved theme
+#   2. Fallback to DEFAULT_THEME
+#
 
-# FZF theme manager script
-# Usage: source ~/.config/fzf/theme.sh [theme_name]
-# If no theme name is provided, it will use the current theme or default to carbonfox
+# ---------- Paths ----------
+FZF_CONFIG_DIR="$HOME/.config/fzf"
+THEME_DIR="$FZF_CONFIG_DIR/themes"
+CURRENT_THEME_FILE="$FZF_CONFIG_DIR/current_theme"
 
-# Directory where themes are stored
-THEME_DIR="$HOME/.config/fzf/themes"
+# ---------- Defaults ----------
+DEFAULT_THEME="rose"
 
-# Current theme file
-CURRENT_THEME_FILE="$HOME/.config/fzf/current_theme"
-
-# Default theme
-DEFAULT_THEME="kanagawa"
-
-# Get the theme name from argument or current theme file
+# ---------- Resolve theme ----------
 if [ -n "$1" ]; then
   THEME="$1"
 elif [ -f "$CURRENT_THEME_FILE" ]; then
-  THEME=$(cat "$CURRENT_THEME_FILE")
+  THEME="$(<"$CURRENT_THEME_FILE")"
 else
   THEME="$DEFAULT_THEME"
 fi
 
-# Check if theme file exists
 THEME_FILE="$THEME_DIR/$THEME.sh"
+
 if [ ! -f "$THEME_FILE" ]; then
-  echo "Theme '$THEME' not found. Using default theme '$DEFAULT_THEME'."
+  echo "FZF theme '$THEME' not found — falling back to '$DEFAULT_THEME'"
   THEME="$DEFAULT_THEME"
   THEME_FILE="$THEME_DIR/$THEME.sh"
 fi
 
-# Reset FZF_DEFAULT_OPTS to remove any previous theme settings
-# This is a basic reset - you might need to adjust based on your base settings
-export FZF_DEFAULT_OPTS=""
+# ---------- Reset previous theme ----------
+unset FZF_THEME_OPTS
 
-# Source the theme file
+# ---------- Load theme ----------
+# Theme file must export FZF_THEME_OPTS only
 source "$THEME_FILE"
 
-# Save the current theme
-echo "$THEME" > "$CURRENT_THEME_FILE"
+# ---------- Base (non-color) defaults ----------
+# export FZF_BASE_OPTS="
+#   --height=~40%
+#   --layout=reverse
+#   --border=none
+#   --preview-window=right:60%:wrap
+#   --preview '
+#     if [[ -d {} ]]; then
+#       ls --color=always {}
+#     elif [[ -f {} ]]; then
+#       bat --style=numbers --color=always {}
+#     else
+#       echo {}
+#     fi
+#   '
+#   --bind 'ctrl-/:toggle-preview'
+# "
 
-# echo "FZF theme set to: $THEME" 
+export FZF_BASE_OPTS="
+  --layout=reverse
+"
+
+# ---------- Apply theme ----------
+export FZF_DEFAULT_OPTS="$FZF_BASE_OPTS $FZF_THEME_OPTS"
+
+# ---------- Persist theme ----------
+mkdir -p "$FZF_CONFIG_DIR"
+echo "$THEME" >|"$CURRENT_THEME_FILE"

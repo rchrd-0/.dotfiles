@@ -10,7 +10,7 @@ else
   selected=$(
     zoxide query -l |
       grep "^$HOME/" |
-      grep -i -E "^$HOME/\.dotfiles|^$HOME/\.config|^$HOME/documents/development|^$HOME/OneDrive/05_Obsidian" |
+      grep -i -E "^$HOME/\.dotfiles|^$HOME/\.config|^$HOME/documents/development|^$HOME/documents/obsidian-vaults" |
       # grep -i -E "^$HOME/\.dotfiles|^$HOME/\.config|^$HOME/documents/development" |
       grep -v "node_modules" |
       sed -E "s;^$HOME/;;; s/^[0-9.]+\s+//" |

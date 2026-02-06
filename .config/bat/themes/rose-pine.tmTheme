@@ -20,6 +20,7 @@
       <dict>
         <key>background</key>
         <string>#191724</string>
+        <!-- <string>#13121c</string> -->
         <key>caret</key>
         <string>#524f67</string>
         <key>foreground</key>

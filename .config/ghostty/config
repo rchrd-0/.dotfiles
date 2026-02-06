@@ -5,6 +5,7 @@ theme = "Rose Pine"
 font-family = TX02 Nerd Font
 # font-family = CaskaydiaCove Nerd Font Mono
 # font-family = JetBrainsMono Nerd Font Mono
+# font-family = BlexMono Nerd Font Mono
 font-feature = -liga
 font-feature = -dlig
 font-feature = -calt
@@ -12,6 +13,10 @@ font-feature = +cv14
 font-size = 13
 font-thicken = true
 font-thicken-strength = 128
+adjust-cell-height = 0%
+
+# background-opacity = 0.97
+# background-blur = true
 
 cursor-style = block
 cursor-style-blink = false

@@ -1,5 +1,5 @@
 # terafox fzf theme
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+export FZF_THEME_OPTS="
   --highlight-line \
   --info=inline-right \
   --ansi \
@@ -21,4 +21,5 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --color=scrollbar:#a1cdd8 \
   --color=separator:#ff8349 \
   --color=spinner:#e85c51 \
-" 
+"
+

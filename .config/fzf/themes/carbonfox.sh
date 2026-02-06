@@ -1,10 +1,8 @@
 # carbonfox fzf theme
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+export FZF_THEME_OPTS="
   --highlight-line \
   --info=inline-right \
   --ansi \
-  --layout=reverse \
-  --border=none \
   --color=bg+:#2a2a2a \
   --color=bg:#131313 \
   --color=border:#33B1FF \
@@ -21,4 +19,4 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --color=scrollbar:#33B1FF \
   --color=separator:#3DDBD9 \
   --color=spinner:#EE5396 \
-" 
+"

@@ -1,10 +1,8 @@
 # nightfox fzf theme
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+export FZF_THEME_OPTS="
   --highlight-line \
   --info=inline-right \
   --ansi \
-  --layout=reverse \
-  --border=none \
   --color=bg+:#2b3b51 \
   --color=bg:#131a24 \
   --color=border:#63cdcf \
@@ -21,4 +19,5 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --color=scrollbar:#63cdcf \
   --color=separator:#f4a261 \
   --color=spinner:#c94f6d \
-" 
+"
+

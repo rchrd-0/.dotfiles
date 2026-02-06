@@ -1,5 +1,10 @@
 # completions -> fpath
-if [[ ":$FPATH:" != *":/Users/rchrd/.zsh/completions:"* ]]; then export FPATH="/Users/rchrd/.zsh/completions:$FPATH"; fi
+# if [[ ":$FPATH:" != *":/Users/rchrd/.zsh/completions:"* ]]; then export FPATH="/Users/rchrd/.zsh/completions:$FPATH"; fi
+fpath=(
+    $HOME/.zsh/completions
+    $HOME/.zsh.d
+    $fpath
+)
 
 # p10k instant prompt
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
@@ -17,7 +22,6 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export EDITOR=nvim
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
-export GOPATH=$HOME/go
 export BUN_INSTALL="$HOME/.bun"
 export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/.ripgreprc
 
@@ -26,7 +30,6 @@ path=(
     /opt/homebrew/bin
     $HOME/.composer/vendor/bin
     $HOME/.local/bin
-    $GOPATH/bin
     $HOME/.rvm/bin
     $ANDROID_HOME/emulator
     $ANDROID_HOME/platform-tools
@@ -58,12 +61,15 @@ fi
 source "${ZINIT_HOME}/zinit.zsh"
 
 # completions
-fpath=(~/.zsh.d $fpath)
+# fpath=(~/.zsh.d $fpath)
 
 # # brew completions
 if type brew &>/dev/null; then
     fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
 fi
+
+# Load FZF theme
+[ -f "$HOME/.config/fzf/theme.sh" ] && source "$HOME/.config/fzf/theme.sh"
 
 # load completions
 autoload -Uz compinit && compinit
@@ -78,6 +84,7 @@ zinit light z-shell/F-Sy-H
 zinit snippet OMZP::git/git.plugin.zsh
 zinit snippet OMZL::directories.zsh
 zinit snippet OMZL::theme-and-appearance.zsh
+
 # zinit ice depth=1; zinit light jeffreytse/zsh-vi-mode
 
 zle_highlight+=(paste:none)
@@ -89,6 +96,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z-a-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':completion:*' complete-options false
+zstyle ':fzf-tab:*' fzf-flags $=FZF_THEME_OPTS
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
@@ -139,9 +147,6 @@ bindkey '^[k' kill-line
 bindkey '^[u' backward-kill-line
 bindkey '\e' autosuggest-clear
 
-# Load FZF theme
-[ -f "$HOME/.config/fzf/theme.sh" ] && source "$HOME/.config/fzf/theme.sh"
-
 # tools and integrations 
 eval "$(fzf --zsh)"
 eval "$(thefuck --alias)"
@@ -151,4 +156,5 @@ eval "$(oh-my-posh init zsh --config "$HOME/.config/ohmyposh/rchrd.jsonc")"
 
 [ -f "$HOME/.deno/env" ] && source "$HOME/.deno/env"
 
-[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
