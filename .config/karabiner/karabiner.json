@@ -103,6 +103,21 @@
                         ]
                     },
                     {
+                        "description": "right cmd (f20) = right hyper",
+                        "manipulators": [
+                            {
+                                "from": { "key_code": "f20" },
+                                "to": [
+                                    {
+                                        "key_code": "right_control",
+                                        "modifiers": ["right_shift", "right_option"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "shift + delete = forward delete",
                         "enabled": false,
                         "manipulators": [
