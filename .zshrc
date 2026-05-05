@@ -1,10 +1,3 @@
-# completions -> fpath
-# if [[ ":$FPATH:" != *":/Users/rchrd/.zsh/completions:"* ]]; then export FPATH="/Users/rchrd/.zsh/completions:$FPATH"; fi
-fpath=(
-    $HOME/.zsh/completions
-    $HOME/.zsh.d
-    $fpath
-)
 
 # p10k instant prompt
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
@@ -27,6 +20,7 @@ export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/.ripgreprc
 
 # PATH
 path=(
+    $HOME/qmk_toolchains_macosARM64/bin
     /opt/homebrew/bin
     $HOME/.composer/vendor/bin
     $HOME/.local/bin
@@ -70,6 +64,14 @@ fi
 
 # Load FZF theme
 [ -f "$HOME/.config/fzf/theme.sh" ] && source "$HOME/.config/fzf/theme.sh"
+
+# completions -> fpath
+# if [[ ":$FPATH:" != *":/Users/rchrd/.zsh/completions:"* ]]; then export FPATH="/Users/rchrd/.zsh/completions:$FPATH"; fi
+fpath=(
+    $HOME/.zsh/completions
+    $HOME/.zsh.d
+    $fpath
+)
 
 # load completions
 autoload -Uz compinit && compinit

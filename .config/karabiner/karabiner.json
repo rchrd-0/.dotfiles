@@ -104,6 +104,7 @@
                     },
                     {
                         "description": "right cmd (f20) = right hyper",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": { "key_code": "f20" },

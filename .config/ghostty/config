@@ -32,8 +32,9 @@ copy-on-select = clipboard
 macos-titlebar-style = transparent
 macos-window-shadow = true
 macos-icon = xray
-macos-icon-ghost-color = e0def4
-macos-icon-screen-color = 191724,1f1d2e,31748f
+# macos-icon-ghost-color = e0def4
+# macos-icon-screen-color = 191724,1f1d2e,31748f
+# macos-icon-frame = chrome
 macos-option-as-alt = true
 
 quick-terminal-position = top
