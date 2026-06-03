@@ -151,3 +151,7 @@ eval "$(mise activate zsh)"
 eval "$(oh-my-posh init zsh --config "$HOME/.config/ohmyposh/rchrd.jsonc")"
 
 [ -f "$HOME/.deno/env" ] && source "$HOME/.deno/env"
+
+
+# Added by Antigravity CLI installer
+export PATH="/Users/rchrd/.local/bin:$PATH"
