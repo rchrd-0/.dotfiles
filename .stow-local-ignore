@@ -1,7 +1,10 @@
-.DS_Store
-.*/\.DS_Store
+\.DS_Store
+^.*/\.DS_Store
+^/\.plans
 ^/README.md
+^/scripts
 ^/.git
 ^/.gitmodules
 ^/.gitignore
+^/.idea
 ^/.zshrc.bak

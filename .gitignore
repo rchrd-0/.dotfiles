@@ -1,6 +1,7 @@
-.oh-my-zsh/custom/plugins/example/
-.config/karabiner/automatic_backups/
-.config/tmux/plugins/*
-!.config/tmux/plugins/tpm
+.idea/
+.plans/
+config/.config/karabiner/automatic_backups/
+config/.config/tmux/plugins/*
+!config/.config/tmux/plugins/tpm
 .DS_Store
 **/.DS_Store

@@ -1,0 +1,22 @@
+-- print("[vscode.lua]")
+--
+-- local vscode = require("vscode")
+-- local map = vim.keymap.set
+-- local del = vim.keymap.del
+--
+-- del("n", "[d")
+-- del("n", "]d")
+--
+-- map("n", "<leader>f", function()
+--   vscode.notify("editor.action.formatDocument")
+-- end, {})
+--
+-- map("n", "[d", function()
+--   vscode.notify("editor.action.marker.prev")
+-- end, {})
+--
+-- map("n", "]d", function()
+--   vscode.notify("editor.action.marker.next")
+-- end, {})
+--
+
