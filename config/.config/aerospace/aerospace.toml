@@ -176,9 +176,10 @@ run = 'move-node-to-workspace 3'
 if.app-id = 'com.spotify.client'
 run = 'move-node-to-workspace 4'
 
-# [[on-window-detected]]
-# if.app-id = 'org.qbittorrent.qBittorrent'
+[[on-window-detected]]
+if.app-id = 'org.qbittorrent.qBittorrent'
 # run = 'move-node-to-workspace 4'
+run = ['layout floating']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
@@ -192,7 +193,10 @@ run = ['layout floating']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.Preview'
-run = ['layout floating', 'move-node-to-workspace 4']
+run = [
+  'layout floating',
+  # 'move-node-to-workspace 4'
+]
 
 [[on-window-detected]]
 if.app-id = 'com.apple.ActivityMonitor'
@@ -216,6 +220,14 @@ run = 'layout floating'
 
 [[on-window-detected]]
 if.app-id = 'com.colliderli.iina'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.nordvpn.macos'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.QuickTimePlayerX'
 run = 'layout floating'
 
 [[on-window-detected]]

@@ -45,3 +45,13 @@ tmux_smart() {
         command tmux "$@"
     fi
 }
+
+vaultcommit() {
+  git add -A
+  git status --short
+  echo
+  read "reply?Commit these changes? [y/N] "
+  [[ "$reply" == "y" ]] || return 1
+  git commit -m "update: $(date +%Y%m%d)"
+  git push
+}
