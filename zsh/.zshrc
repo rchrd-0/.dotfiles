@@ -127,6 +127,7 @@ alias tmux="tmux_smart"
 alias gbsc="git branch --show-current"
 alias zedp="zed-preview"
 alias sync-secrets="$HOME/.dotfiles/scripts/sync-secrets.sh"
+alias ytdlp="yt-dlp --cookies-from-browser safari"
 
 # alias lvim='NVIM_APPNAME=lazyvim \nvim'
 
@@ -137,11 +138,16 @@ alias themeC='~/.local/bin/theme-switcher-charm'
 bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
+
 bindkey '^[[1;3D' backward-word  # Alt+Left
 bindkey '^[[1;3C' forward-word   # Alt+Right
+bindkey '^[[1;3D' backward-word
+bindkey '^[[1;3C' forward-word
+
 bindkey '^[k' kill-line
 bindkey '^[u' backward-kill-line
-bindkey '\e' autosuggest-clear
+# bindkey '\e' autosuggest-clear
+bindkey '^g' autosuggest-clear
 
 # tools and integrations 
 eval "$(fzf --zsh)"

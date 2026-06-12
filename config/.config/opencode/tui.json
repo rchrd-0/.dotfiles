@@ -9,6 +9,8 @@
     "messages_first": "ctrl+g",
     "messages_last": "ctrl+alt+g",
     "messages_next": "<leader>]",
-    "messages_previous": "<leader>["
+    "messages_previous": "<leader>[",
+    "status_view": false,
+    "prompt_skills": "<leader>s"
   }
 }

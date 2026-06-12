@@ -22,11 +22,13 @@ config_file="$HOME/.config/dotfiles/config.env"
 source "$config_file"
 
 openrouter_dev_key="$(bw get password "$BW_OPENROUTER_ITEM_ID" --session "$BW_SESSION")"
+c7_key="$(bw get password "$BW_C7_ITEM_ID" --session "$BW_SESSION")"
 
 umask 177
 
 cat >"$out_file" <<EOF
 export OPENROUTER_API_KEY=$(printf '%q' "$openrouter_dev_key")
+export C7_API_KEY=$(printf '%q' "$c7_key")
 EOF
 
 echo "Wrote $out_file"

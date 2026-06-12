@@ -44,3 +44,5 @@ quick-terminal-animation-duration = 0
 keybind = global:cmd+shift+`=toggle_quick_terminal
 keybind = alt+left=unbind
 keybind = alt+right=unbind
+keybind = alt+backspace=text:\x1b\x7f
+keybind = shift+enter=text:\n

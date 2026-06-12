@@ -55,3 +55,7 @@ vaultcommit() {
   git commit -m "update: $(date +%Y%m%d)"
   git push
 }
+
+opencode() {
+  OPENCODE_ENABLE_EXA=1 command opencode "$@"
+}
