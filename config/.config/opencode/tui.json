@@ -11,6 +11,7 @@
     "messages_next": "<leader>]",
     "messages_previous": "<leader>[",
     "status_view": false,
-    "prompt_skills": "<leader>s"
+    "prompt_skills": "<leader>s",
+    "which_key_toggle": "ctrl+alt+o"
   }
 }

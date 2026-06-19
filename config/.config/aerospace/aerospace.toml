@@ -21,8 +21,6 @@ exec-on-workspace-change = [
   '/bin/bash',
   '-c',
   '~/.local/bin/aerospace-follow-utils.sh "cc.ffitch.shottr" "com.raycast.macos"',
-  # '~/.local/bin/aerospace-follow-utils.sh "com.bitwarden.desktop" "cc.ffitch.shottr" "com.raycast.macos"',
-  # '~/.local/bin/aerospace-follow-utils.sh "com.bitwarden.desktop" "cc.ffitch.shottr" "com.raycast.macos" "com.apple.finder"',
 ]
 
 automatically-unhide-macos-hidden-apps = false
@@ -188,7 +186,6 @@ run = ['layout floating']
 
 [[on-window-detected]]
 if.app-id = 'com.aone.keka'
-# run = ['layout floating', 'move-node-to-workspace 4']
 run = ['layout floating']
 
 [[on-window-detected]]

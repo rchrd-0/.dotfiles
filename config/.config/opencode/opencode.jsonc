@@ -3,7 +3,10 @@
   "share": "disabled",
   "autoupdate": true,
   "permission": {
-    "websearch": "allow"
+    "websearch": "allow",
+    "external_directory": {
+      "/Users/rchrd/Documents/obsidian-vaults/base/**": "allow"
+    }
   },
   "instructions": [
     ".plans/**/*.md",
@@ -12,11 +15,70 @@
   "mcp": {
     "context7": {
       "type": "remote",
-      "url": "https://mcp.context7.com/mcp/oauth",
-      "enabled": true
+      "url": "https://mcp.context7.com/mcp",
+      "enabled": true,
+      "headers": {
+        "CONTEXT7-API-KEY": "{env:C7_API_KEY}"
+      }
+    },
+    "exa": {
+      "type": "remote",
+      "url": "https://mcp.exa.ai/mcp",
+      "enabled": true,
+      "headers": {
+        "x-api-key": "{env:EXA_API_KEY}"
+      }
     }
   },
   "plugin": [
     "@tarquinen/opencode-dcp@latest"
-  ]
+  ],
+  "provider": {
+    "openai": {
+      "options": {
+        "baseURL": "http://127.0.0.1:2455/v1",
+        "apiKey": "{env:CODEX_LB_API_KEY}"
+      },
+      "models": {
+        "gpt-5.5": {
+          "name": "GPT-5.5",
+          "reasoning": true,
+          "options": {
+            "reasoningEffort": "medium",
+            "reasoningSummary": "detailed"
+          },
+          "limit": {
+            "context": 1050000,
+            "output": 128000
+          }
+        },
+        "gpt-5.4": {
+          "name": "GPT-5.4",
+          "reasoning": true,
+          "options": {
+            "reasoningEffort": "medium",
+            "reasoningSummary": "detailed"
+          },
+          "limit": {
+            "context": 1050000,
+            "output": 128000
+          }
+        },
+        "gpt-5.4-mini": {
+          "name": "GPT-5.4 mini",
+          "reasoning": true,
+          "options": {
+            "reasoningEffort": "medium",
+            "reasoningSummary": "detailed"
+          },
+          "limit": {
+            "context": 400000,
+            "output": 128000
+          }
+        },
+      }
+    }
+  },
+  "model": "openai/gpt-5.5",
+  "small_model": "openai/gpt-5.4-mini"
 }

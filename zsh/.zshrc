@@ -109,30 +109,7 @@ setopt hist_save_no_dups
 setopt extendedglob globdots
 
 # aliases
-# alias vim="nvim"
-alias cat=bat
-alias a-s="php artisan serve"
-alias a-t="php artisan tinker"
-alias d-b="bash docker/build.sh"
-alias np-w="npm run watch"
-alias np-d="npm run dev"
-alias np-b="npm run build"
-alias np-s="npm run start"
-alias np-l="npm run lint"
-alias np-f="npm run format"
-alias air="~/.air"
-alias lg="lazygit"
-alias services="cd ~/services"
-alias tmux="tmux_smart"
-alias gbsc="git branch --show-current"
-alias zedp="zed-preview"
-alias sync-secrets="$HOME/.dotfiles/scripts/sync-secrets.sh"
-alias ytdlp="yt-dlp --cookies-from-browser safari"
-
-# alias lvim='NVIM_APPNAME=lazyvim \nvim'
-
-alias theme='~/.local/bin/theme-switcher'
-alias themeC='~/.local/bin/theme-switcher-charm'
+[ -f "$HOME/.zsh/aliases.zsh" ] && source "$HOME/.zsh/aliases.zsh"
 
 # keybindings
 bindkey -e
@@ -155,9 +132,11 @@ eval "$(thefuck --alias)"
 eval "$(zoxide init zsh)"
 eval "$(mise activate zsh)"
 eval "$(oh-my-posh init zsh --config "$HOME/.config/ohmyposh/rchrd.jsonc")"
+eval "$(codex completion zsh)"
 
 [ -f "$HOME/.deno/env" ] && source "$HOME/.deno/env"
 
+export SERVICES="$HOME/services"
 
 # Added by Antigravity CLI installer
 export PATH="/Users/rchrd/.local/bin:$PATH"
