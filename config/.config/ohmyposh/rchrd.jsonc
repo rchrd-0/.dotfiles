@@ -1,0 +1,97 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "blocks": [
+    {
+      "segments": [
+        {
+          "type": "executiontime",
+          "style": "plain",
+          "foreground": "yellow",
+          "template": "{{ .FormattedMs }}",
+          "properties": {
+            "style": "round",
+            "threshold": 5000
+          }
+        },
+        // {
+        //   "type": "node",
+        //   "style": "plain",
+        //   "foreground": "cyan",
+        //   "template": "{{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}",
+        //   "properties": {
+        //     "fetch_package_manager": true
+        //   }
+        // },
+        {
+          "type": "python",
+          "style": "plain",
+          "foreground": "cyan",
+          "template": "   {{if .Venv }}{{ .Venv }}{{ end }} {{ .Full }} "
+        }
+      ],
+      "force": true,
+      "type": "rprompt"
+    },
+    {
+      "alignment": "left",
+      "newline": false,
+      "segments": [
+        {
+          "foreground": "blue",
+          "properties": {
+            "style": "full"
+          },
+          "style": "plain",
+          "template": "{{ .Path }}",
+          "type": "path"
+        },
+        {
+          "foreground": "green",
+          "properties": {
+            "fetch_status": true,
+            "fetch_upstream_icon": true,
+            "branch_icon": "",
+            "branch_identical_icon": "",
+            "branch_ahead_icon": " ⇡",
+            "branch_behind_icon": " ⇣"
+          },
+          "template": " {{ .HEAD }}{{if .Ahead }} ⇡{{.Ahead}}{{end}}{{if .Behind }} ⇣{{.Behind}}{{end}}<yellow>{{if .Working.Modified }} !{{.Working.Modified}}{{end}}</><lightBlue>{{if .Working.Untracked }} ?{{.Working.Untracked}}{{end}}</><yellow>{{if or .Staging.Added .Staging.Modified }} +{{add .Staging.Added .Staging.Modified}}{{end}}</><red>{{if or .Working.Deleted .Staging.Deleted }} -{{add .Working.Deleted .Staging.Deleted}}{{end}}</><green>{{if gt .StashCount 0 }} *{{.StashCount}}{{end}}</>",
+          "style": "plain",
+          "type": "git"
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          // "foreground": "green",
+          "foreground_templates": [
+            "{{ if gt .Code 0 }}red{{ end }}",
+            "{{ if eq .Code 0 }}green{{ end }}"
+          ],
+          "style": "plain",
+          "template": "❯ ",
+          "type": "text"
+        }
+      ],
+      "type": "prompt"
+    }
+  ],
+  "transient_prompt": {
+    "newline": false,
+    // "foreground": "green",
+    "foreground_templates": [
+      "{{ if gt .Code 0 }}red{{ end }}",
+      "{{ if eq .Code 0 }}green{{ end }}"
+    ],
+    "template": "❯ "
+  },
+  "secondary_prompt": {
+    "foreground": "darkGray",
+    "template": "⋯ "
+  },
+  "version": 3
+}
