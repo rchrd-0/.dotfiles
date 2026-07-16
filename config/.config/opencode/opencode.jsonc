@@ -31,7 +31,8 @@
     }
   },
   "plugin": [
-    "@tarquinen/opencode-dcp@latest"
+    // "@tarquinen/opencode-dcp@latest",
+    "@mohak34/opencode-notifier@latest"
   ],
   "provider": {
     "openai": {
@@ -40,11 +41,47 @@
         "apiKey": "{env:CODEX_LB_API_KEY}"
       },
       "models": {
+        "gpt-5.6-sol": {
+          "name": "GPT-5.6 Sol",
+          "reasoning": true,
+          "options": {
+            "reasoningEffort": "high",
+            "reasoningSummary": "detailed"
+          },
+          "limit": {
+            "context": 353400,
+            "output": 128000
+          }
+        },
+        "gpt-5.6-terra": {
+          "name": "GPT-5.6 Terra",
+          "reasoning": true,
+          "options": {
+            "reasoningEffort": "medium",
+            "reasoningSummary": "detailed"
+          },
+          "limit": {
+            "context": 353400,
+            "output": 128000
+          }
+        },
+        "gpt-5.6-luna": {
+          "name": "GPT-5.6 Luna",
+          "reasoning": true,
+          "options": {
+            "reasoningEffort": "medium",
+            "reasoningSummary": "detailed"
+          },
+          "limit": {
+            "context": 353400,
+            "output": 128000
+          }
+        },
         "gpt-5.5": {
           "name": "GPT-5.5",
           "reasoning": true,
           "options": {
-            "reasoningEffort": "medium",
+            "reasoningEffort": "high",
             "reasoningSummary": "detailed"
           },
           "limit": {
@@ -56,7 +93,7 @@
           "name": "GPT-5.4",
           "reasoning": true,
           "options": {
-            "reasoningEffort": "medium",
+            "reasoningEffort": "high",
             "reasoningSummary": "detailed"
           },
           "limit": {
@@ -79,6 +116,6 @@
       }
     }
   },
-  "model": "openai/gpt-5.5",
+  "model": "openai/gpt-5.6-sol",
   "small_model": "openai/gpt-5.4-mini"
 }

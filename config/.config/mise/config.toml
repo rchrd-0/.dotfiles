@@ -16,6 +16,7 @@ python = "3.12"
 bitwarden = "latest"
 wrangler = "latest"
 "aqua:neovim/neovim" = "0.12"
+herdr = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["node", "python"]

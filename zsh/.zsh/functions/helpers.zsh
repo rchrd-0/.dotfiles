@@ -1,5 +1,5 @@
 tunnel() {
-    local port
+    local port="${1:-}"
 
     if [ "$1" ]; then
         port="$1"
@@ -11,13 +11,11 @@ tunnel() {
         fi
     fi
 
-      # Verify port is a positive integer
     if ! [[ "$port" =~ ^[1-9][0-9]*$ ]]; then
         gum style --foreground 196 "Error: Invalid port number. Please enter a positive integer."
         return 1
     fi
 
-    # Verify port is within valid range (1-65535)
     if [ "$port" -lt 1 ] || [ "$port" -gt 65535 ]; then
         gum style --foreground 196 "Error: Port number must be between 1 and 65535."
         return 1
@@ -46,7 +44,7 @@ tmux_smart() {
     fi
 }
 
-vaultcommit() {
+vc() {
   git add -A
   git status --short
   echo
@@ -58,4 +56,13 @@ vaultcommit() {
 
 opencode() {
   OPENCODE_ENABLE_EXA=1 command opencode "$@"
+}
+
+h() {
+  [[ -n "$TMUX" ]] || {
+    print -u2 "h: not inside tmux"
+    return 1
+  }
+
+  herdr session attach "$(tmux display-message -p '#S')"
 }

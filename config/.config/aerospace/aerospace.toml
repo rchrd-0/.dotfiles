@@ -152,7 +152,10 @@ run = ['layout tiling', 'move-node-to-workspace 1']
 
 [[on-window-detected]]
 if.app-id = 'company.thebrowser.Browser'
-run = ['layout tiling', 'move-node-to-workspace 1']
+run = [
+  'layout tiling',
+  # 'move-node-to-workspace 1'
+]
 
 [[on-window-detected]]
 if.app-id = 'com.linear'
@@ -217,6 +220,10 @@ run = 'layout floating'
 
 [[on-window-detected]]
 if.app-id = 'com.colliderli.iina'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = '^mpv$'
 run = 'layout floating'
 
 [[on-window-detected]]
