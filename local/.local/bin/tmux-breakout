@@ -29,14 +29,8 @@
 #     fi
 # fi
 
-# check if we are in a tmux session
-if [ -z "$TMUX" ]; then
-    echo "Must be run from inside tmux"
-    exit 1
-fi
-
 # get current session name
-current_session=$(tmux display-message -p "#{session_name}")
+current_session=$(tsn) || exit 1
 
 # get current working directory
 current_path=$(tmux display-message -p "#{pane_current_path}")
