@@ -17,6 +17,8 @@ bitwarden = "latest"
 wrangler = "latest"
 "aqua:neovim/neovim" = "0.12"
 herdr = "latest"
+hunk = "latest"
+java = "zulu-17"
 
 [settings]
 idiomatic_version_file_enable_tools = ["node", "python"]

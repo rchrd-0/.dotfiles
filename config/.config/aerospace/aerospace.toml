@@ -89,7 +89,7 @@ alt-4 = 'workspace 4'
 alt-5 = 'workspace 5'
 # alt-q = 'workspace Q'
 # alt-z = 'workspace Z'
-alt-backtick = 'workspace `'
+alt-backtick = 'workspace "`"'
 alt-n = 'workspace next --wrap-around'
 alt-p = 'workspace prev --wrap-around'
 
@@ -100,7 +100,7 @@ alt-shift-4 = ['move-node-to-workspace 4']
 alt-shift-5 = ['move-node-to-workspace 5']
 # alt-shift-q = ['move-node-to-workspace Q']
 # alt-shift-z = ['move-node-to-workspace Z']
-alt-shift-backtick = ['move-node-to-workspace `']
+alt-shift-backtick = ['move-node-to-workspace "`"']
 alt-shift-n = ['move-node-to-workspace next --wrap-around']
 alt-shift-p = ['move-node-to-workspace prev --wrap-around']
 
@@ -240,4 +240,13 @@ run = 'layout floating'
 
 [[on-window-detected]]
 if.app-id = 'com.logi.ghub'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.FontBook'
+run = 'layout floating'
+
+
+[[on-window-detected]]
+if.app-id = 'com.daisydiskapp.DaisyDiskStandAlone'
 run = 'layout floating'

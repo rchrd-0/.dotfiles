@@ -16,7 +16,6 @@ done
 export XDG_CONFIG_HOME="$HOME/.config"
 export EDITOR=nvim
 export ANDROID_HOME=$HOME/Library/Android/sdk
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
 export BUN_INSTALL="$HOME/.bun"
 export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/.ripgreprc
 
@@ -137,6 +136,3 @@ eval "$(codex completion zsh)"
 [ -f "$HOME/.deno/env" ] && source "$HOME/.deno/env"
 
 export SERVICES="$HOME/services"
-
-# Added by Antigravity CLI installer
-export PATH="/Users/rchrd/.local/bin:$PATH"
