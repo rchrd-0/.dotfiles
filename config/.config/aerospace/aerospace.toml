@@ -139,6 +139,17 @@ equal = 'resize smart +50'
 shift-minus = 'resize smart-opposite -50'
 shift-equal = 'resize smart-opposite +50'
 0 = 'balance-sizes'
+1 = 'workspace 1'
+2 = 'workspace 2'
+3 = 'workspace 3'
+4 = 'workspace 4'
+5 = 'workspace 5'
+shift-1 = ['move-node-to-workspace 1']
+shift-2 = ['move-node-to-workspace 2']
+shift-3 = ['move-node-to-workspace 3']
+shift-4 = ['move-node-to-workspace 4']
+shift-5 = ['move-node-to-workspace 5']
+alt-shift-backtick = ['move-node-to-workspace "`"']
 
 [workspace-to-monitor-force-assignment]
 '`' = ['secondary']
