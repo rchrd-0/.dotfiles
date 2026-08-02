@@ -1,10 +1,5 @@
 config-version = 2
 
-# after-startup-command = [
-#   # 'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0',
-#   'exec-and-forget borders hidpi=on active_color=0x80e1e3e4 inactive_color=0x00000000 width=4.0',
-# ]
-
 start-at-login = true
 
 enable-normalization-flatten-containers = true

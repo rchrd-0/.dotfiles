@@ -1,27 +1,49 @@
 #:schema https://mise.jdx.dev/schema/mise.json
 
 [tools]
-node = "24"
-ruby = ['3.3.5']
-usage = "latest"
-uv = "latest"
-bun = "latest"
-deno = "latest"
-pnpm = "latest"
-erlang = "latest"
-elixir = "latest"
-typst = "latest"
+# runtimes
+node = { version = "24", corepack = true }
+bun = "1.3"
+deno = "2"
+
+# languages
+ruby = "3.3.5"
 go = "1.25"
 python = "3.12"
-bitwarden = "latest"
-wrangler = "latest"
-"aqua:neovim/neovim" = "0.12"
-herdr = "latest"
-hunk = "latest"
 java = "zulu-17"
 
+# BEAM - paired
+erlang = "28.3.1"
+elixir = "1.19.5-otp-28"
+
+# authoring, editor tooling etc
+typst = "latest"
+"aqua:neovim/neovim" = "0.12.3"
+
+# dev utils
+usage = "latest"
+uv = "latest"
+herdr = "latest"
+hunk = "latest"
+
+# cloud and service clis
+bitwarden = "latest"
+neonctl = "latest"
+turso = "latest"
+wrangler = "latest"
+flyctl = "latest"
+
+[tool_alias]
+render = "github:render-oss/cli"
+
+[tools.render]
+version = "latest"
+rename_exe = { "cli_v*" = "render" }
+
 [settings]
-idiomatic_version_file_enable_tools = ["node", "python"]
+idiomatic_version_file_enable_tools = ["node", "python", "bun"]
+lockfile_platforms = ["macos-arm64"]
+minimum_release_age = "3d"
 
 [settings.python]
 uv_venv_auto = "source"
