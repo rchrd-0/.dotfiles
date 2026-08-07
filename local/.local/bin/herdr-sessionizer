@@ -27,13 +27,13 @@ fi
   exit 1
 }
 
-# Normalise the path so workspace matching is reliable.
+# Normalise the path before deriving the workspace label.
 selected="$(cd "$selected" && pwd -P)"
 selected_name="$(basename "$selected" | tr '.' '_')"
 
 workspace_id=$(
   "$HERDR_BIN" workspace list 2>/dev/null |
-    jq -r --arg cwd "$selected" '
+    jq -r --arg label "$selected_name" '
       def workspaces:
         if type == "array" then .
         elif type == "object" then
@@ -45,8 +45,8 @@ workspace_id=$(
       workspaces[]
       | select(type == "object")
       | select(
-          (.cwd // .root_cwd // .path // "")
-          == $cwd
+          ((.label // "") | sub("^\\[[0-9]+\\][[:space:]]*"; ""))
+          == $label
         )
       | (.workspace_id // .id // empty)
     ' |
