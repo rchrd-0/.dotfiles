@@ -131,6 +131,9 @@ eval "$(thefuck --alias)"
 eval "$(zoxide init zsh)"
 eval "$(mise activate zsh)"
 eval "$(oh-my-posh init zsh --config "$HOME/.config/ohmyposh/rchrd.jsonc")"
+for _f in ${HOME}/.config/herdr/plugins/github/herdr-automatic-rename-*/shell/hook.zsh(N); do
+  source $_f; break
+done
 eval "$(codex completion zsh)"
 
 [ -f "$HOME/.deno/env" ] && source "$HOME/.deno/env"

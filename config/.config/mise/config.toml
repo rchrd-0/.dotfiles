@@ -8,7 +8,7 @@ deno = "2"
 
 # languages
 ruby = "3.3.5"
-go = "1.25"
+go = "1.26.4"
 python = "3.12"
 java = "zulu-17"
 
