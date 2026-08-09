@@ -36,12 +36,13 @@ function _bw {
         "create:Create an object in the vault."
         "edit:Edit an object from the vault."
         "delete:Delete an object from the vault."
-        "restore:Restores an object from the trash."
+        "restore:Restores an object from the trash or archive."
         "move:Move an item to an organization."
         "confirm:Confirm an object to the organization."
         "import:Import vault data from a file."
         "export:Export vault data to a CSV, JSON or ZIP file."
         "share:--DEPRECATED-- Move an item to an organization."
+        "archive:Archive an object from the vault."
         "send:Work with Bitwarden sends. A Send can be quickly created using this command or subcommands can be used to fine-tune the Send"
         "receive:Access a Bitwarden Send from a url"
         "device-approval:Manage device approval requests sent to organizations that use SSO with trusted devices."
@@ -120,6 +121,9 @@ function _bw {
       ;;
     share)
       _bw_share
+      ;;
+    archive)
+      _bw_archive
       ;;
     send)
       _bw_send
@@ -237,6 +241,7 @@ function _bw_list {
     '--collectionid[Filter items by collection id.]' \
     '--organizationid[Filter items or collections by organization id.]' \
     '--trash[Filter items that are deleted and in the trash.]' \
+    '--archived[Filter items that are archived.]' \
     '(-h --help)'{-h,--help}'[output usage information]' \
     "*::arg:->args"
 }
@@ -294,6 +299,9 @@ function _bw_import {
   _arguments -C \
     '--formats[List formats]' \
     '--organizationid[ID of the organization to import to.]' \
+    '--keyfile[Path to a key file used to unlock a KeePass (kdbx) database.]' \
+    '--passwordenv[Environment variable storing the import file password.]' \
+    '--passwordfile[Path to a file containing the import file password as its first line.]' \
     '(-h --help)'{-h,--help}'[output usage information]' \
     "*::arg:->args"
 }
@@ -312,6 +320,10 @@ function _bw_share {
   
 }
 
+function _bw_archive {
+  
+}
+
 function _bw_send {
   local -a commands
 
@@ -319,7 +331,7 @@ function _bw_send {
     '(-f --file)'{-f,--file}'[Specifies that <data> is a filepath]' \
     '(-d --deleteInDays)'{-d,--deleteInDays}'[The number of days in the future to set deletion date, defaults to 7]' \
     '--password[optional password to access this Send. Can also be specified in JSON.]' \
-    '--email[optional emails to access this Send. Can also be specified in JSON.]' \
+    '--emails[optional emails to access this Send. Can also be specified in JSON.]' \
     '(-a --maxAccessCount)'{-a,--maxAccessCount}'[The amount of max possible accesses.]' \
     '--hidden[Hide <data> in web by default. Valid only if --file is not set.]' \
     '(-n --name)'{-n,--name}'[The name of the Send. Defaults to a guid for text Sends and the filename for files.]' \

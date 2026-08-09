@@ -103,7 +103,7 @@ split_horizontal = ["prefix+minus", "prefix+\""]
 # close_pane = "prefix+x"
 # zoom = "prefix+z"       # legacy alias: fullscreen
 # resize_mode = "prefix+r"
-# toggle_sidebar = "prefix+b"
+toggle_sidebar = "prefix+space"
 
 # Navigate-mode movement. These local shortcuts win while navigate mode is open.
 # They are independent from focus_pane_*. Do not include prefix+, esc, enter, tab, or 1..9 here.
@@ -139,12 +139,18 @@ height = "90%"
 key = "prefix+f"
 type = "popup"
 command = "~/.local/bin/herdr-sessionizer"
-description = "open project workspace"
+description = "open sessionizer"
 width = "50%"
 height = "50%"
 
 [[keys.command]]
 key = "prefix+!"
+type = "shell"
+command = '"$HERDR_BIN_PATH" pane move "$HERDR_ACTIVE_PANE_ID" --new-tab --focus'
+description = "break pane to a new tab"
+
+[[keys.command]]
+key = "prefix+b"
 type = "shell"
 command = '~/.local/bin/herdr-sessionizer "$HERDR_ACTIVE_PANE_CWD"'
 description = "focus or create workspace for current directory"
@@ -159,7 +165,7 @@ description = "switch to previous workspace"
 key = "prefix+backtick"
 type = "plugin_action"
 command = "fullerzz.sesh.open-picker"
-description = "open Sesh workspace picker"
+description = "open Sesh"
 
 [[keys.command]]
 key = "alt+h"
@@ -339,7 +345,7 @@ enabled = true
 [session]
 # Resume supported AI-agent panes into their native conversation sessions after
 # a Herdr server restart. Requires official integrations that report session refs.
-# resume_agents_on_restore = true
+resume_agents_on_restore = true
 
 [remote]
 # Whether herdr manages the ssh config used for `herdr --remote`.
@@ -359,7 +365,7 @@ enabled = true
 # Requires a Kitty graphics-compatible outer terminal.
 # kitty_graphics = false
 # Save recent pane screen history across full server restarts.
-pane_history = false
+pane_history = true
 # While prefix mode is active, temporarily switch the host input source to
 # an ASCII-capable mode so prefix commands register even when an IME is
 # active, then restore the previous input source when prefix mode exits. On

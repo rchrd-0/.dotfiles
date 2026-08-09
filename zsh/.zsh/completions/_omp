@@ -20,7 +20,7 @@ _omp_models_list() {
 	done
 	_values -s , 'models' $items
 }
-_omp_tools() { _values -s , 'tools' read bash edit ast_grep ast_edit ask debug eval ssh github glob grep lsp inspect_image browser checkpoint rewind task job irc todo web_search search_tool_bm25 write memory_edit retain recall reflect learn manage_skill }
+_omp_tools() { _values -s , 'tools' read bash edit ast_grep ast_edit ask debug eval github glob grep lsp inspect_image browser computer checkpoint rewind security_scan task hub todo web_search write memory_edit retain recall reflect learn manage_skill }
 
 _omp_commands() {
 	local -a commands
@@ -30,6 +30,8 @@ _omp_commands() {
 		'auth-broker:Manage the omp auth-broker (credential vault)'
 		'auth-gateway:Run an auth-gateway forward proxy backed by the configured broker'
 		'bench:Benchmark models with the same prompt  time-to-first-token and generation throughput (tokens/s)'
+		'browser-relay:Run the local CDP relay that lets the browser tool drive your own Chrome tabs'
+		'cleanse:Detect and fix project diagnostics with weighted parallel subagents'
 		'commit:Generate a commit message and update changelogs'
 		'completions:Print a shell completion script (bash, zsh, or fish)'
 		'config:Manage configuration settings'
@@ -46,6 +48,7 @@ _omp_commands() {
 		'say:Synthesize text with the local TTS engine and play it through the speakers'
 		'search:Test web search providers'
 		'setup:Run onboarding setup or install dependencies for optional features'
+		'share:Share a saved session via an encrypted link (same as /share)'
 		'shell:Interactive shell console'
 		'ssh:Manage SSH host configurations'
 		'stats:View usage statistics'
@@ -106,13 +109,37 @@ _omp_cmd_auth_gateway() {
 _omp_cmd_bench() {
 	_arguments -s \
 		'(-h --help)'{-h,--help}'[Show help]' \
-		'--runs[Requests per model (results are averaged)]:value:' \
-		'--max-tokens[Max output tokens per request]:value:' \
+		'--runs[Requests per model (results are averaged; default  10)]:value:' \
+		'--max-tokens[Max output tokens per request (default  512; cache mode  64)]:value:' \
 		'--prompt[Custom prompt text (default  bundled bench prompt)]:file:_files' \
 		'--service-tier[Service tier applied per model family (default  configured `tier.*` settings; `none` omits it)]:value:(none auto default flex scale priority)' \
 		'--json[Output JSON]' \
-		'--par[Execute runs with N parallel queries/requests]:value:' \
+		'--par[Execute runs with N parallel queries/requests (default  4)]:value:' \
+		'--cache[Run independent cold/warm prompt-cache pairs (not supported for openai-codex-responses)]' \
+		'--cache-prefix-file[Stable prompt prefix file for --cache]:file:_files' \
+		'--cache-prefix-bytes[Stable prefix byte budget for --cache (default  8192)]:value:' \
+		'--cache-pairs[Cold/warm pairs per model for --cache (default  1)]:value:' \
+		'--cache-concurrency[Concurrent cache pairs for --cache; each pair remains sequential (default  1)]:value:' \
 		':models:_files'
+}
+
+_omp_cmd_browser_relay() {
+	_arguments -s \
+		'(-h --help)'{-h,--help}'[Show help]' \
+		'(-p --port)'{-p,--port}'[Port to listen on]:value:' \
+		'--token[Require the extension to present this token]:file:_files' \
+		'--dir[Extension install directory (install; default ~/.omp/browser-relay/extension)]:file:_files' \
+		'--no-group[Don’t gather controllable tabs into an ’omp’ tab group]' \
+		'(-v --verbose)'{-v,--verbose}'[Log relay traffic summaries to stderr]' \
+		':action:(serve install)'
+}
+
+_omp_cmd_cleanse() {
+	_arguments -s \
+		'(-h --help)'{-h,--help}'[Show help]' \
+		'(-n --agents)'{-n,--agents}'[Maximum number of file-disjoint subagents]:value:' \
+		'(-m --model)'{-m,--model}'[Subagent model selector]:model:_omp_call models' \
+		'(-t --tests)'{-t,--tests}'[Also run configured project test suites]'
 }
 
 _omp_cmd_commit() {
@@ -256,8 +283,9 @@ _omp_cmd_read() {
 _omp_cmd_say() {
 	_arguments -s \
 		'(-h --help)'{-h,--help}'[Show help]' \
-		'--voice[Voice id]:file:_files' \
+		'--voice[Voice id]:value:(af_heart af_bella af_nicole af_aoede af_kore af_sarah am_michael am_fenrir am_puck bf_emma bm_george bm_fable)' \
 		'--model[Local TTS model key]:model:_omp_call models' \
+		'(-f --file)'{-f,--file}'[Read the text to speak from this file]:file:_files' \
 		'(-o --out)'{-o,--out}'[Write WAV to this path instead of playing]:file:_files' \
 		':text:_files'
 }
@@ -265,7 +293,7 @@ _omp_cmd_say() {
 _omp_cmd_search() {
 	_arguments -s \
 		'(-h --help)'{-h,--help}'[Show help]' \
-		'--provider[Search provider]:value:(auto perplexity gemini anthropic codex xai zai exa tinyfish jina kagi tavily firecrawl brave kimi parallel synthetic searxng duckduckgo)' \
+		'--provider[Search provider]:value:(auto perplexity gemini anthropic codex xai zai exa tinyfish jina kagi tavily firecrawl brave kimi parallel synthetic searxng startpage duckduckgo ecosia google mojeek public)' \
 		'--recency[Recency filter]:value:(day week month year)' \
 		'(-l --limit)'{-l,--limit}'[Max results to return]:value:' \
 		'--compact[Render condensed output]' \
@@ -278,6 +306,13 @@ _omp_cmd_setup() {
 		'(-c --check)'{-c,--check}'[Check if dependencies are installed]' \
 		'--json[Output status as JSON]' \
 		':component:(python speech)'
+}
+
+_omp_cmd_share() {
+	_arguments -s \
+		'(-h --help)'{-h,--help}'[Show help]' \
+		'--gist[Upload to a secret GitHub gist instead of the share server]' \
+		':session:_files'
 }
 
 _omp_cmd_shell() {
@@ -360,7 +395,8 @@ _omp_cmd_usage() {
 		'(-p --provider)'{-p,--provider}'[Only show usage for this provider id (e.g. anthropic)]:file:_files' \
 		'(-r --redact)'{-r,--redact}'[Redact account emails/ids (shortest unique prefix) for sharing screenshots]' \
 		'--history[Show recorded usage-limit history (hourly snapshots) instead of a live snapshot]' \
-		'(-d --days)'{-d,--days}'[History window in days (with --history)]:value:'
+		'(-d --days)'{-d,--days}'[History window in days (with --history)]:value:' \
+		':action:(invalidate)'
 }
 
 _omp_cmd_worktree() {
@@ -382,6 +418,11 @@ _omp() {
 		'--smol[Smol/fast model for lightweight tasks (or PI_SMOL_MODEL env)]:model:_omp_call models' \
 		'--slow[Slow/reasoning model for thorough analysis (or PI_SLOW_MODEL env)]:model:_omp_call models' \
 		'--plan[Plan model for architectural planning (or PI_PLAN_MODEL env)]:model:_omp_call models' \
+		'--prewalk[Switch from the active model to a fast/cheap model at the first edit/write after the plan’s todo list exists (default off; see prewalk.enabled)]' \
+		'--no-prewalk[Disable prewalk even if prewalk.enabled is set]' \
+		'--prewalk-into[Target model for prewalk (default the "smol" role)]:file:_files' \
+		'--plan-yolo[Force read-only plan mode at start, auto-approve the plan on the model’s first resolve call, then switch to --plan-yolo-into to implement it]' \
+		'--plan-yolo-into[Target model for plan-yolo execution (default the "smol" role)]:file:_files' \
 		'--provider[Provider to use (legacy; prefer --model)]:file:_files' \
 		'--api-key[API key (defaults to env vars)]:file:_files' \
 		'--system-prompt[System prompt (default  coding assistant prompt)]:file:_files' \
@@ -392,9 +433,12 @@ _omp() {
 		'--cwd[Directory to start in (overrides the launch cwd)]:file:_files' \
 		'--mode[Output mode  text (default), json, rpc, or rpc-ui]:value:(text json rpc acp rpc-ui)' \
 		'*--config[Load an extra config.yml-style overlay for this run (repeatable)]:file:_files' \
+		'*--add-dir[Add a workspace directory beyond the working directory (repeatable)]:file:_files' \
 		'(-p --print)'{-p,--print}'[Non-interactive mode  process prompt and exit]' \
 		'(-c --continue)'{-c,--continue}'[Continue previous session]' \
 		'(-r --resume)'{-r,--resume}'[Resume a session (by ID prefix, path, or picker if omitted)]:session:_omp_call sessions' \
+		'--from-claude[Import a Claude Code session into OMP]' \
+		'--from-codex[Import a Codex session into OMP]' \
 		'--session-dir[Directory for session storage and lookup]:dir:_files -/' \
 		'--no-session[Don’t save session (ephemeral)]' \
 		'--models[Comma-separated model patterns for Ctrl+P cycling]:models:_omp_models_list' \
@@ -402,7 +446,8 @@ _omp() {
 		'--no-lsp[Disable LSP tools, formatting, and diagnostics]' \
 		'--no-pty[Disable PTY-based interactive bash execution]' \
 		'--tools[Comma-separated list of tools to enable (default  all)]:value:_omp_tools' \
-		'--thinking[Set thinking level  off, minimal, low, medium, high, xhigh, auto]:value:(off minimal low medium high xhigh auto)' \
+		'--thinking[Set thinking level  off, minimal, low, medium, high, xhigh, max, auto]:value:(off minimal low medium high xhigh max auto)' \
+		'--service-tier[OpenAI service tier for this session (none omits service_tier)]:value:(none auto default flex scale priority)' \
 		'--hide-thinking[Hide thinking blocks in TUI output (display only, does not disable model thinking)]' \
 		'--advisor[Enable the advisor runtime (passively reviews each turn and injects notes)]' \
 		'*--hook[Load a hook/extension file (can be used multiple times)]:file:_files' \
@@ -414,7 +459,7 @@ _omp() {
 		'--export[Export session file to HTML and exit]:file:_files' \
 		'--no-title[Disable title auto-generation]' \
 		'--print-thoughts[Include thinking blocks in print mode text output]' \
-		'--max-time[Stop the session after this many seconds]:file:_files' \
+		'--max-time[Stop the session after this duration (e.g., 600, 10m, 1h)]:file:_files' \
 		'--auto-approve[Auto-approve all tool calls (skip approval prompts)]' \
 		'--approval-mode[Override tools.approvalMode for this session (always-ask|write|yolo)]:value:(always-ask write yolo)' \
 		'1: :_omp_commands' \
@@ -427,6 +472,8 @@ _omp() {
 			auth-broker) _omp_cmd_auth_broker ;;
 			auth-gateway) _omp_cmd_auth_gateway ;;
 			bench) _omp_cmd_bench ;;
+			browser-relay) _omp_cmd_browser_relay ;;
+			cleanse) _omp_cmd_cleanse ;;
 			commit) _omp_cmd_commit ;;
 			completions) _omp_cmd_completions ;;
 			config) _omp_cmd_config ;;
@@ -443,6 +490,7 @@ _omp() {
 			say) _omp_cmd_say ;;
 			search|q) _omp_cmd_search ;;
 			setup) _omp_cmd_setup ;;
+			share) _omp_cmd_share ;;
 			shell) _omp_cmd_shell ;;
 			ssh) _omp_cmd_ssh ;;
 			stats) _omp_cmd_stats ;;

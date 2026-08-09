@@ -49,7 +49,7 @@
             "reasoningSummary": "detailed"
           },
           "limit": {
-            "context": 353400,
+            "context": 272000,
             "output": 128000
           }
         },
@@ -61,7 +61,7 @@
             "reasoningSummary": "detailed"
           },
           "limit": {
-            "context": 353400,
+            "context": 272000,
             "output": 128000
           }
         },
@@ -73,7 +73,7 @@
             "reasoningSummary": "detailed"
           },
           "limit": {
-            "context": 353400,
+            "context": 272000,
             "output": 128000
           }
         },
@@ -85,7 +85,7 @@
             "reasoningSummary": "detailed"
           },
           "limit": {
-            "context": 258400,
+            "context": 272000,
             "output": 128000
           }
         },
@@ -97,7 +97,7 @@
             "reasoningSummary": "detailed"
           },
           "limit": {
-            "context": 258400,
+            "context": 272000,
             "output": 128000
           }
         },
@@ -109,7 +109,7 @@
             "reasoningSummary": "detailed"
           },
           "limit": {
-            "context": 258400,
+            "context": 272000,
             "output": 128000
           }
         },
