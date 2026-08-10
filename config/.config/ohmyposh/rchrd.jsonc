@@ -8,7 +8,7 @@
           "style": "plain",
           "foreground": "yellow",
           "template": "{{ .FormattedMs }}",
-          "properties": {
+          "options": {
             "style": "round",
             "threshold": 5000
           }
@@ -18,7 +18,7 @@
         //   "style": "plain",
         //   "foreground": "cyan",
         //   "template": "{{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}",
-        //   "properties": {
+        //   "options": {
         //     "fetch_package_manager": true
         //   }
         // },
@@ -26,7 +26,13 @@
           "type": "python",
           "style": "plain",
           "foreground": "cyan",
-          "template": "   {{if .Venv }}{{ .Venv }}{{ end }} {{ .Full }} "
+          "template": "    {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}"
+        },
+        {
+          "type": "go",
+          "style": "plain",
+          "foreground": "12",
+          "template": "  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
         }
       ],
       "force": true,
@@ -38,7 +44,7 @@
       "segments": [
         {
           "foreground": "blue",
-          "properties": {
+          "options": {
             "style": "full"
           },
           "style": "plain",
@@ -47,7 +53,7 @@
         },
         {
           "foreground": "green",
-          "properties": {
+          "options": {
             "fetch_status": true,
             "fetch_upstream_icon": true,
             "branch_icon": "",

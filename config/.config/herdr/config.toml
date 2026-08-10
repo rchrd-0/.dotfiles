@@ -97,7 +97,7 @@ focus_pane_up = ["prefix+k", "prefix+up"]
 focus_pane_right = ["prefix+l", "prefix+right"]
 # cycle_pane_next = "prefix+tab"
 # cycle_pane_previous = "prefix+shift+tab"
-# last_pane = ""          # optional, unset by default; bind e.g. "prefix+tab" for global back-and-forth
+last_pane = "prefix+tab"                         # optional, unset by default; bind e.g. "prefix+tab" for global back-and-forth
 split_vertical = ["prefix+v", "prefix+%"]
 split_horizontal = ["prefix+minus", "prefix+\""]
 # close_pane = "prefix+x"
@@ -158,7 +158,7 @@ description = "focus or create workspace for current directory"
 [[keys.command]]
 key = "prefix+shift+s"
 type = "plugin_action"
-command = "fullerzz.sesh.last"
+command = "third774.last-workspace.toggle"
 description = "switch to previous workspace"
 
 [[keys.command]]
