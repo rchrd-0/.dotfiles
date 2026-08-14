@@ -28,4 +28,4 @@ gui:
       - "#e0def4" # text
 git:
   diffRenderers:
-    - command: hunk pager --mode split
+    - command: hunk pager
