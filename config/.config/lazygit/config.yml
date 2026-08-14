@@ -26,3 +26,6 @@ gui:
       - "#eb6f92" # love
     defaultFgColor:
       - "#e0def4" # text
+git:
+  diffRenderers:
+    - command: hunk pager --mode split

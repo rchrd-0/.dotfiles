@@ -25,6 +25,7 @@ usage = "latest"
 uv = "latest"
 herdr = "latest"
 hunk = "latest"
+"github:agavra/tuicr" = "latest"
 
 # cloud and service clis
 bitwarden = "latest"
@@ -32,6 +33,7 @@ neonctl = "latest"
 turso = "latest"
 wrangler = "latest"
 flyctl = "latest"
+aws = { version = "latest", symlink_bins = "true" }
 
 [tool_alias]
 render = "github:render-oss/cli"

@@ -72,6 +72,12 @@ zinit light zsh-users/zsh-completions
 autoload -Uz compinit
 compinit
 
+autoload bashcompinit
+bashcompinit
+if (( $+commands[aws_completer] )); then
+  complete -C "${commands[aws_completer]}" aws
+fi
+
 # fzf-tab must load after compinit
 zinit light Aloxaf/fzf-tab
 

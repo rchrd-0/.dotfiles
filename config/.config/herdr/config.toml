@@ -138,7 +138,7 @@ height = "90%"
 [[keys.command]]
 key = "prefix+f"
 type = "popup"
-command = "~/.local/bin/herdr-sessionizer"
+command = "$HOME/.local/bin/herdr-sessionizer"
 description = "open sessionizer"
 width = "50%"
 height = "50%"
@@ -150,9 +150,15 @@ command = '"$HERDR_BIN_PATH" pane move "$HERDR_ACTIVE_PANE_ID" --new-tab --focus
 description = "break pane to a new tab"
 
 [[keys.command]]
+key = "prefix+0"
+type = "shell"
+command = 'workspace_id=$("$HERDR_BIN_PATH" workspace list | jq -er ".result.workspaces[] | select(.number == 1) | .workspace_id") && "$HERDR_BIN_PATH" workspace focus "$workspace_id"'
+description = "go to base workspace"
+
+[[keys.command]]
 key = "prefix+b"
 type = "shell"
-command = '~/.local/bin/herdr-sessionizer "$HERDR_ACTIVE_PANE_CWD"'
+command = '$HOME/.local/bin/herdr-sessionizer "$HERDR_ACTIVE_PANE_CWD"'
 description = "focus or create workspace for current directory"
 
 [[keys.command]]
