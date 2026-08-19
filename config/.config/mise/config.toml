@@ -3,7 +3,7 @@
 [tools]
 # runtimes
 node = { version = "24", corepack = true }
-bun = "1.3"
+bun = "1.3.14"
 deno = "2"
 
 # languages

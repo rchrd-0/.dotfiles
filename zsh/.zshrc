@@ -17,6 +17,7 @@ path=(
     $ANDROID_HOME/platform-tools
     $HOME/.config/herd-lite/bin
     $HOME/.config/emacs/bin
+    $HOME/.bun/bin
     $path
 )
 
