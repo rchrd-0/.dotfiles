@@ -5,3 +5,6 @@
 	path = config/.config/nvim
 	url = git@github.com:rchrd-0/nvim.git
 	branch = v2-lazyvim
+[submodule "zsh/.zsh/private"]
+	path = zsh/.zsh/private
+	url = git@github.com:rchrd-0/zsh-private.git

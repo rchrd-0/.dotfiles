@@ -23,12 +23,12 @@ path=(
 
 export PATH
 
-# local secrets, functions
+# local secrets
 [ -f "$HOME/.zsh.secrets" ] && source "$HOME/.zsh.secrets"
 
-for zsh_function_file in "$HOME/.zsh/functions"/*.zsh(.N); do
-  source "$zsh_function_file"
-done
+# private shell configuration
+[[ -r "$HOME/.zsh/private/init.zsh" ]] \
+  && source "$HOME/.zsh/private/init.zsh"
 
 # shell opts, history
 setopt extendedglob globdots
