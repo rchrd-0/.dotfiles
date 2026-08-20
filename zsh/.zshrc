@@ -34,17 +34,17 @@ export PATH
 setopt extendedglob globdots
 setopt globdots
 
-HISTSIZE=5000
-SAVEHIST=$HISTSIZE
+HISTSIZE=100000
+SAVEHIST=80000
 HISTFILE="$HOME/.zsh_history"
 
 setopt appendhistory
 setopt sharehistory
+
 setopt hist_ignore_space
 setopt hist_ignore_all_dups
 setopt hist_save_no_dups
-
-HISTDUP=erase
+setopt hist_find_no_dups
 
 # zinit setup
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
