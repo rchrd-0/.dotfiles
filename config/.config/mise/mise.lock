@@ -225,13 +225,13 @@ checksum = "sha256:b62ad2b6d7d2464f12a5bcad7ff47f19d08325773b5efd21610e445a05a9b
 url = "https://dl.google.com/go/go1.26.4.darwin-arm64.tar.gz"
 
 [[tools.herdr]]
-version = "0.8.0"
+version = "0.8.2"
 backend = "aqua:ogulcancelik/herdr"
 
 [tools.herdr."platforms.macos-arm64"]
-checksum = "sha256:d53a9f93fccfdfcc55632927bf51002f5add0aa7990bcdf508ffbd84ac658178"
-url = "https://github.com/herdrdev/herdr/releases/download/v0.8.0/herdr-macos-aarch64"
-url_api = "https://api.github.com/repos/herdrdev/herdr/releases/assets/500422629"
+checksum = "sha256:a5d4f4d504d8b309c91f811050559300faba31258425f53c50852fc96f6ae574"
+url = "https://github.com/herdrdev/herdr/releases/download/v0.8.2/herdr-macos-aarch64"
+url_api = "https://api.github.com/repos/herdrdev/herdr/releases/assets/521169108"
 
 [[tools.hunk]]
 version = "0.18.1"

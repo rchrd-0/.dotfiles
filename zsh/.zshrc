@@ -63,7 +63,7 @@ eval "$(fzf --zsh)"
 
 # completion sources must be on fpath before compinit
 fpath=(
-  "$HOME/.zsh/completions"
+  "$HOME/.zsh/private/completions"
   "/opt/homebrew/share/zsh/site-functions"
   $fpath
 )
@@ -134,3 +134,7 @@ for _f in ${HOME}/.config/herdr/plugins/github/herdr-automatic-rename-*/shell/ho
 done
 
 eval "$(codex completion zsh)"
+
+. "$HOME/.atuin/bin/env"
+
+eval "$(atuin init zsh --disable-up-arrow)"
