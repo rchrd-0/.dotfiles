@@ -26,9 +26,16 @@ export PATH
 # local secrets
 [ -f "$HOME/.zsh.secrets" ] && source "$HOME/.zsh.secrets"
 
+# public completion sources must be on fpath before compinit
+fpath=(
+  "/opt/homebrew/share/zsh/site-functions"
+  $fpath
+)
+
 # private shell configuration
-[[ -r "$HOME/.zsh/private/init.zsh" ]] \
-  && source "$HOME/.zsh/private/init.zsh"
+PRIVATE_DOTFILES_HOME="${PRIVATE_DOTFILES_HOME:-$HOME/.dotfiles-private}"
+[[ -r "$PRIVATE_DOTFILES_HOME/zsh/init.zsh" ]] \
+  && source "$PRIVATE_DOTFILES_HOME/zsh/init.zsh"
 
 # shell opts, history
 setopt extendedglob globdots
@@ -60,13 +67,6 @@ source "${ZINIT_HOME}/zinit.zsh"
 [ -f "$HOME/.config/fzf/theme.sh" ] && source "$HOME/.config/fzf/theme.sh"
 
 eval "$(fzf --zsh)"
-
-# completion sources must be on fpath before compinit
-fpath=(
-  "$HOME/.zsh/private/completions"
-  "/opt/homebrew/share/zsh/site-functions"
-  $fpath
-)
 
 zinit light zsh-users/zsh-completions
 
@@ -122,20 +122,12 @@ bindkey '^[u' backward-kill-line
 bindkey '^g' autosuggest-clear
 
 # tools and integrations
-eval "$(thefuck --alias)"
 eval "$(zoxide init zsh)"
-
 
 eval "$(oh-my-posh init zsh --config "$HOME/.config/ohmyposh/rchrd.jsonc")"
 
-for _f in ${HOME}/.config/herdr/plugins/github/herdr-automatic-rename-*/shell/hook.zsh(N); do
-  source $_f; break
-done
+[[ -r "$PRIVATE_DOTFILES_HOME/zsh/post.zsh" ]] \
+  && source "$PRIVATE_DOTFILES_HOME/zsh/post.zsh"
 
-eval "$(codex completion zsh)"
-
-. "$HOME/.atuin/bin/env"
-
-eval "$(atuin init zsh --disable-up-arrow)"
-
+# keep mise last so its PATH and hooks apply after other integrations
 eval "$("$HOME/.local/bin/mise" activate zsh)"
