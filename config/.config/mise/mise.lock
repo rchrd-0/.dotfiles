@@ -48,51 +48,21 @@ checksum = "blake3:d82363542f95b9a76ce1145e6cba342723d83034035adfd318112c183c6d2
 url = "https://awscli.amazonaws.com/AWSCLIV2-2.36.19.pkg"
 
 [[tools.bitwarden]]
-version = "2026.7.0"
+version = "2026.8.0"
 backend = "aqua:bitwarden/clients"
 
-[tools.bitwarden."platforms.linux-arm64"]
-checksum = "sha256:e33ed05ca0fada9bd51b8bce76a230369bf0eefd5796a0a8e60699c977327fb5"
-url = "https://github.com/bitwarden/clients/releases/download/cli-v2026.7.0/bw-linux-arm64-2026.7.0.zip"
-url_api = "https://api.github.com/repos/bitwarden/clients/releases/assets/487644422"
-
-[tools.bitwarden."platforms.linux-arm64-musl"]
-checksum = "sha256:e33ed05ca0fada9bd51b8bce76a230369bf0eefd5796a0a8e60699c977327fb5"
-url = "https://github.com/bitwarden/clients/releases/download/cli-v2026.7.0/bw-linux-arm64-2026.7.0.zip"
-url_api = "https://api.github.com/repos/bitwarden/clients/releases/assets/487644422"
-
-[tools.bitwarden."platforms.linux-x64"]
-checksum = "sha256:7a35145e205952f7434d2370da359543145ae0c45ba1af0fe9bdd99d40a00180"
-url = "https://github.com/bitwarden/clients/releases/download/cli-v2026.7.0/bw-linux-2026.7.0.zip"
-url_api = "https://api.github.com/repos/bitwarden/clients/releases/assets/487644388"
-
-[tools.bitwarden."platforms.linux-x64-musl"]
-checksum = "sha256:7a35145e205952f7434d2370da359543145ae0c45ba1af0fe9bdd99d40a00180"
-url = "https://github.com/bitwarden/clients/releases/download/cli-v2026.7.0/bw-linux-2026.7.0.zip"
-url_api = "https://api.github.com/repos/bitwarden/clients/releases/assets/487644388"
-
 [tools.bitwarden."platforms.macos-arm64"]
-checksum = "sha256:61d5de8a279a9faf3637216f4fb02b506a1e4bb2817d1c64be0bd474466dd85a"
-url = "https://github.com/bitwarden/clients/releases/download/cli-v2026.7.0/bw-macos-arm64-2026.7.0.zip"
-url_api = "https://api.github.com/repos/bitwarden/clients/releases/assets/487644300"
-
-[tools.bitwarden."platforms.macos-x64"]
-checksum = "sha256:b37836d539798f5adeb8a907619ee8a55b6322549bb68669aa4b3a03d5bc0452"
-url = "https://github.com/bitwarden/clients/releases/download/cli-v2026.7.0/bw-macos-2026.7.0.zip"
-url_api = "https://api.github.com/repos/bitwarden/clients/releases/assets/487644269"
-
-[tools.bitwarden."platforms.windows-x64"]
-checksum = "sha256:b0c22438607b789c6452dbd37ffd6be0e8a61e7a5c4e9ac57804d7ae5ed01b5b"
-url = "https://github.com/bitwarden/clients/releases/download/cli-v2026.7.0/bw-windows-2026.7.0.zip"
-url_api = "https://api.github.com/repos/bitwarden/clients/releases/assets/487644184"
+checksum = "sha256:73414942357644605eefd3f4afaf0b41b71772ad6574e8e3c72e0b6d237104c8"
+url = "https://github.com/bitwarden/clients/releases/download/cli-v2026.8.0/bw-macos-arm64-2026.8.0.zip"
+url_api = "https://api.github.com/repos/bitwarden/clients/releases/assets/522478010"
 
 [[tools.bun]]
-version = "1.3.14"
+version = "1.4.0"
 backend = "core:bun"
 
 [tools.bun."platforms.macos-arm64"]
-checksum = "sha256:d8b96221828ad6f97ac7ac0ab7e95872341af763001e8803e8267652c2652620"
-url = "https://github.com/oven-sh/bun/releases/download/bun-v1.3.14/bun-darwin-aarch64.zip"
+checksum = "sha256:c669e97f6164e1c96e0701748db98dfa77492908cbd8394c7557134a735de381"
+url = "https://github.com/oven-sh/bun/releases/download/bun-v1.4.0/bun-darwin-aarch64.zip"
 
 [[tools.deno]]
 version = "2.9.4"
@@ -199,13 +169,13 @@ url = "https://github.com/superfly/flyctl/releases/download/v0.4.78/flyctl_0.4.7
 url_api = "https://api.github.com/repos/superfly/flyctl/releases/assets/500457881"
 
 [[tools."github:agavra/tuicr"]]
-version = "0.21.0"
+version = "0.23.1"
 backend = "github:agavra/tuicr"
 
 [tools."github:agavra/tuicr"."platforms.macos-arm64"]
-checksum = "sha256:abea50eef2dec9eb18a19a6ce687c2dce712184edb2852d2cac1abf66ec96ae8"
-url = "https://github.com/agavra/tuicr/releases/download/v0.21.0/tuicr-0.21.0-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/agavra/tuicr/releases/assets/503216017"
+checksum = "sha256:8badc032c8fd927496c32d5a28cb8765d592c1d8a474769f873bc89959ae6765"
+url = "https://github.com/agavra/tuicr/releases/download/v0.23.1/tuicr-0.23.1-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/agavra/tuicr/releases/assets/522478671"
 
 [[tools."github:render-oss/cli"]]
 version = "2.22.0"
@@ -234,13 +204,13 @@ url = "https://github.com/herdrdev/herdr/releases/download/v0.8.2/herdr-macos-aa
 url_api = "https://api.github.com/repos/herdrdev/herdr/releases/assets/521169108"
 
 [[tools.hunk]]
-version = "0.18.1"
+version = "0.19.1"
 backend = "aqua:modem-dev/hunk"
 
 [tools.hunk."platforms.macos-arm64"]
-checksum = "sha256:26c71e50c5894a879cc68ebb3dea961e963bc023111ae3cb3fb2ca4a42bc9f75"
-url = "https://github.com/modem-dev/hunk/releases/download/v0.18.1/hunkdiff-darwin-arm64.tar.gz"
-url_api = "https://api.github.com/repos/modem-dev/hunk/releases/assets/510397447"
+checksum = "sha256:4486ca1a5e05faca0f3a6c02f9ad415d02f1c3729fd349d0a09a8d8bc6f894b5"
+url = "https://github.com/modem-dev/hunk/releases/download/v0.19.1/hunkdiff-darwin-arm64.tar.gz"
+url_api = "https://api.github.com/repos/modem-dev/hunk/releases/assets/528525669"
 
 [[tools.java]]
 version = "zulu-17.68.17.0"

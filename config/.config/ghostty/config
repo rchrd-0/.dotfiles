@@ -3,13 +3,13 @@
 theme = "Rose Pine"
 
 font-family = TX02 Nerd Font
+font-family = Sarasa Mono HC
 font-feature = -liga
 font-feature = -dlig
 font-feature = -calt
 font-feature = +cv14
 font-size = 13
 font-thicken = true
-font-thicken-strength = 128
 adjust-cell-height = 0%
 
 cursor-style = block
@@ -41,6 +41,6 @@ keybind = alt+right=unbind
 keybind = alt+backspace=text:\x1b\x7f
 keybind = shift+enter=text:\n
 
-bell-features = attention,audio
-bell-audio-path = /System/Library/Sounds/Hero.aiff
-bell-audio-volume = 0.25
+bell-features = attention
+
+auto-update-channel = tip

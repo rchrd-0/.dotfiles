@@ -14,3 +14,5 @@ alias cx="pe codex"
 
 alias theme='~/.local/bin/theme-switcher'
 alias themeC='~/.local/bin/theme-switcher-charm'
+
+alias keka='/Applications/Keka.app/Contents/MacOS/Keka --cli'

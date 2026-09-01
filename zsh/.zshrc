@@ -125,7 +125,6 @@ bindkey '^g' autosuggest-clear
 eval "$(thefuck --alias)"
 eval "$(zoxide init zsh)"
 
-eval "$("$HOME/.local/bin/mise" activate zsh)"
 
 eval "$(oh-my-posh init zsh --config "$HOME/.config/ohmyposh/rchrd.jsonc")"
 
@@ -138,3 +137,5 @@ eval "$(codex completion zsh)"
 . "$HOME/.atuin/bin/env"
 
 eval "$(atuin init zsh --disable-up-arrow)"
+
+eval "$("$HOME/.local/bin/mise" activate zsh)"
