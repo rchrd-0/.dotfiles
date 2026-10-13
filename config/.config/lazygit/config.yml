@@ -28,4 +28,18 @@ gui:
       - "#e0def4" # text
 git:
   diffRenderers:
-    - command: hunk pager
+    - command: delta --paging=never --line-numbers
+      name: delta
+
+    - type: rawGit
+      name: raw
+customCommands:
+  - key: '<ctrl+g>'
+    context: files
+    description: Generate AI commit message
+    prompts:
+      - type: input
+        key: Message
+        title: Review commit message
+        initialValue: '{{ runCommand "ai-commit-message" }}'
+    command: 'git commit -m {{.Form.Message | quote}}'

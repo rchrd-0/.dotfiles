@@ -139,15 +139,19 @@ shift-equal = 'resize smart-opposite +50'
 3 = 'workspace 3'
 4 = 'workspace 4'
 5 = 'workspace 5'
+6 = 'workspace 6'
 shift-1 = ['move-node-to-workspace 1']
 shift-2 = ['move-node-to-workspace 2']
 shift-3 = ['move-node-to-workspace 3']
 shift-4 = ['move-node-to-workspace 4']
 shift-5 = ['move-node-to-workspace 5']
+shift-6 = ['move-node-to-workspace 6']
 alt-shift-backtick = ['move-node-to-workspace "`"']
 
 [workspace-to-monitor-force-assignment]
-'`' = ['secondary']
+'`' = ['secondary', 'built-in']
+'5' = ['secondary', 'built-in']
+'6' = ['secondary', 'built-in']
 
 # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
 #s = ['layout sticky tiling', 'mode main']
@@ -169,7 +173,7 @@ run = 'move-node-to-workspace 2'
 
 [[on-window-detected]]
 if.app-id = 'com.tinyapp.TablePlus'
-run = 'move-node-to-workspace 2'
+run = ['move-node-to-workspace 2', 'layout floating']
 
 [[on-window-detected]]
 if.app-id = 'net.whatsapp.WhatsApp'
@@ -251,7 +255,6 @@ run = 'layout floating'
 [[on-window-detected]]
 if.app-id = 'com.apple.FontBook'
 run = 'layout floating'
-
 
 [[on-window-detected]]
 if.app-id = 'com.daisydiskapp.DaisyDiskStandAlone'

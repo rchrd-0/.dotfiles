@@ -4,6 +4,7 @@ Stow-managed packages in this repo:
 
 - `config` -> `~/.config`
 - `local` -> `~/.local`
+- `stow` -> `~/.stow-global-ignore` (shared ignore rules, including `.DS_Store`)
 - `vim` -> `~/.vim`, `~/.vimrc`
 - `zsh` -> `~/.zsh`, `~/.zprofile`, `~/.zshrc`
 
@@ -22,5 +23,6 @@ This applies all current packages to `$HOME`.
 If needed:
 
 ```bash
+stow -t ~ stow
 stow -t ~ config local vim zsh
 ```

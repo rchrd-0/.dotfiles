@@ -10,6 +10,8 @@ typeset -U path PATH
 
 path=(
     $HOME/qmk_toolchains_macosARM64/bin
+    /opt/homebrew/opt/libpq/bin
+    /opt/homebrew/opt/mysql-client/bin
     /opt/homebrew/bin
     $HOME/.composer/vendor/bin
     $HOME/.local/bin
@@ -104,7 +106,6 @@ zstyle ':fzf-tab:*' fzf-flags $=FZF_THEME_OPTS
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-
 # aliases
 [ -f "$HOME/.zsh/aliases.zsh" ] && source "$HOME/.zsh/aliases.zsh"
 
@@ -131,3 +132,6 @@ eval "$(oh-my-posh init zsh --config "$HOME/.config/ohmyposh/rchrd.jsonc")"
 
 # keep mise last so its PATH and hooks apply after other integrations
 eval "$("$HOME/.local/bin/mise" activate zsh)"
+
+# Vite+ bin (https://viteplus.dev)
+. "/Users/rchrd/.config/vite-plus/env"

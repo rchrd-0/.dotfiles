@@ -1,0 +1,24 @@
+# macOS metadata
+\.DS_Store
+
+# Version-control metadata
+RCS
+.+,v
+CVS
+\.\#.+
+\.cvsignore
+\.svn
+_darcs
+\.hg
+\.git
+\.gitignore
+\.gitmodules
+
+# Editor backup and lock files
+.+~
+\#.*\#
+
+# Package documentation
+^/README.*
+^/LICENSE.*
+^/COPYING

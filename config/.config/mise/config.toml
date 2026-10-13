@@ -1,10 +1,11 @@
 #:schema https://mise.jdx.dev/schema/mise.json
 
 [tools]
-# runtimes
+# runtimes / tooling
 node = { version = "24", corepack = true }
 bun = "1.4"
 deno = "2"
+nub = { version = "latest", allow_builds = ["@nubjs/nub"] }
 
 # languages
 ruby = "3.3.5"
@@ -25,18 +26,24 @@ usage = "latest"
 uv = "latest"
 herdr = "latest"
 hunk = "latest"
-"github:agavra/tuicr" = "latest"
 
 # cloud and service clis
 bitwarden = "latest"
+bitwarden-secrets-manager = "latest"
 neonctl = "latest"
 turso = "latest"
 wrangler = "latest"
 flyctl = "latest"
 aws = { version = "latest", symlink_bins = "true" }
+railway = "latest"
+doctl = "latest"
 
 [tool_alias]
 render = "github:render-oss/cli"
+tuicr = "github:agavra/tuicr"
+
+[tools.tuicr]
+version = "latest"
 
 [tools.render]
 version = "latest"
