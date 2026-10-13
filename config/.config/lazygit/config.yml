@@ -36,10 +36,11 @@ git:
 customCommands:
   - key: '<ctrl+g>'
     context: files
-    description: Generate AI commit message
-    prompts:
-      - type: input
-        key: Message
-        title: Review commit message
-        initialValue: '{{ runCommand "ai-commit-message" }}'
-    command: 'git commit -m {{.Form.Message | quote}}'
+    description: Generate AI commit message and copy to clipboard
+    command: >-
+      message="$(ai-commit-message)" &&
+      printf '%s' "$message" | pbcopy &&
+      printf '%s\n\nCopied to clipboard. Close this popup, press c, and paste to review.\n' "$message"
+    loadingText: Generating AI commit message
+    output: popup
+    outputTitle: AI commit message ready
