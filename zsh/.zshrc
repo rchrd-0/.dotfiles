@@ -117,7 +117,10 @@ bindkey '^n' history-search-forward
 bindkey '^[[1;3D' backward-word
 bindkey '^[[1;3C' forward-word
 
+bindkey '^[i' expand-or-complete
+bindkey '^[j' accept-line
 bindkey '^[k' kill-line
+bindkey '^[l' clear-screen
 bindkey '^[u' backward-kill-line
 
 bindkey '^g' autosuggest-clear
