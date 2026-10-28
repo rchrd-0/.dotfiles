@@ -149,6 +149,15 @@ description = "open sessionizer"
 width = "50%"
 height = "50%"
 
+# Diagnostic: compare popup/fzf startup without zoxide or workspace API calls.
+[[keys.command]]
+key = "prefix+alt+f"
+type = "popup"
+command = 'printf "%s\n" alpha beta gamma | fzf --no-sort --border'
+description = "test static fzf popup"
+width = "50%"
+height = "50%"
+
 [[keys.command]]
 key = "prefix+!"
 type = "shell"
@@ -179,28 +188,56 @@ type = "plugin_action"
 command = "fullerzz.sesh.open-picker"
 description = "open Sesh"
 
+# Superseded by smart-splits; retained for reference.
+# [[keys.command]]
+# key = "alt+h"
+# type = "plugin_action"
+# command = "herdr-splits.nav-left"
+# description = "navigate left through Neovim or Herdr"
+#
+# [[keys.command]]
+# key = "alt+j"
+# type = "plugin_action"
+# command = "herdr-splits.nav-down"
+# description = "navigate down through Neovim or Herdr"
+#
+# [[keys.command]]
+# key = "alt+k"
+# type = "plugin_action"
+# command = "herdr-splits.nav-up"
+# description = "navigate up through Neovim or Herdr"
+#
+# [[keys.command]]
+# key = "alt+l"
+# type = "plugin_action"
+# command = "herdr-splits.nav-right"
+# description = "navigate right through Neovim or Herdr"
+#
+
+# Alt keys invoke smart-splits; the plugin forwards Ctrl-h/j/k/l to Neovim.
+# Companion plugin: herdr plugin link ~/.local/share/nvim/lazy/smart-splits-backend-herdr
 [[keys.command]]
 key = "alt+h"
 type = "plugin_action"
-command = "herdr-splits.nav-left"
+command = "smart-splits-backend-herdr.left"
 description = "navigate left through Neovim or Herdr"
 
 [[keys.command]]
 key = "alt+j"
 type = "plugin_action"
-command = "herdr-splits.nav-down"
+command = "smart-splits-backend-herdr.down"
 description = "navigate down through Neovim or Herdr"
 
 [[keys.command]]
 key = "alt+k"
 type = "plugin_action"
-command = "herdr-splits.nav-up"
+command = "smart-splits-backend-herdr.up"
 description = "navigate up through Neovim or Herdr"
 
 [[keys.command]]
 key = "alt+l"
 type = "plugin_action"
-command = "herdr-splits.nav-right"
+command = "smart-splits-backend-herdr.right"
 description = "navigate right through Neovim or Herdr"
 
 [[keys.command]]

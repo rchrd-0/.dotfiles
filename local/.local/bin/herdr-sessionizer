@@ -11,7 +11,7 @@ else
     zoxide query -l |
       grep "^$HOME/" |
       grep -i -E \
-        "^$HOME/\.dotfiles|^$HOME/\.config|^$HOME/documents/development|^$HOME/documents/obsidian-vaults" |
+        "^$HOME/\.dotfiles|^$HOME/\.config|^$HOME/documents/development|^$HOME/documents/obsidian-vaults|^$HOME/documents/gateway" |
       grep -v "node_modules" |
       sed -E "s;^$HOME/;;; s/^[0-9.]+[[:space:]]+//" |
       fzf \

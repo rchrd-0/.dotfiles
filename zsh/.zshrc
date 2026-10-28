@@ -10,6 +10,7 @@ typeset -U path PATH
 
 path=(
     $HOME/qmk_toolchains_macosARM64/bin
+    /opt/homebrew/opt/curl/bin
     /opt/homebrew/opt/libpq/bin
     /opt/homebrew/opt/mysql-client/bin
     /opt/homebrew/bin

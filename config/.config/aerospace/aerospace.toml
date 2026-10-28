@@ -168,6 +168,13 @@ run = [
 ]
 
 [[on-window-detected]]
+if.app-id = 'com.brave.Browser.origin'
+run = [
+  'layout tiling',
+  # 'move-node-to-workspace 1'
+]
+
+[[on-window-detected]]
 if.app-id = 'com.linear'
 run = 'move-node-to-workspace 2'
 

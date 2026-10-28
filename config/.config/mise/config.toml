@@ -9,7 +9,7 @@ nub = { version = "latest", allow_builds = ["@nubjs/nub"] }
 
 # languages
 ruby = "3.3.5"
-go = "1.26.4"
+go = "1.27"
 python = "3.12"
 java = "zulu-17"
 
