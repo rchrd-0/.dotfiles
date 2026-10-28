@@ -14,7 +14,7 @@ else
         "^$HOME/\.dotfiles|^$HOME/\.config|^$HOME/documents/development|^$HOME/documents/obsidian-vaults|^$HOME/documents/gateway" |
       grep -v "node_modules" |
       sed -E "s;^$HOME/;;; s/^[0-9.]+[[:space:]]+//" |
-      fzf \
+      ESCDELAY=10 fzf \
         --no-sort \
         --border |
       sed "s|^|$HOME/|"

@@ -1,0 +1,103 @@
+#!/usr/bin/env bash
+# Requires the local Rex sessionizer_go action. Floating pickers also use
+# ~/.config/rex/sessionizer-restore.lua to return focus to their source pane.
+set -euo pipefail
+
+client="${REX_CLIENT:-}"
+return_to=""
+list_only=false
+selected=""
+
+usage() {
+  printf 'Usage: rex-sessionizer [--client CLIENT] [--return-to BLOCK] [--list | DIRECTORY]\n' >&2
+  exit 2
+}
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --client) [[ $# -ge 2 && -n "$2" ]] || usage; client=$2; shift 2 ;;
+    --return-to) [[ $# -ge 2 && -n "$2" ]] || usage; return_to=$2; shift 2 ;;
+    --list) list_only=true; shift ;;
+    --) shift; [[ $# -eq 1 && -z "$selected" ]] || usage; selected=$1; shift ;;
+    -*) usage ;;
+    *) [[ -z "$selected" && -n "$1" ]] || usage; selected=$1; shift ;;
+  esac
+done
+[[ $list_only == false || -z "$selected" ]] || usage
+
+candidates() {
+  # Preserve zoxide's ranking and the same roots as the Herdr picker. Compare
+  # literal prefixes so punctuation in HOME is never treated as a regex.
+  zoxide query -l | awk -v home="$HOME/" '
+    index($0, home) == 1 {
+      relative = substr($0, length(home) + 1)
+      lower = tolower(relative)
+      if (lower ~ /^(\.dotfiles[^\/]*|\.config|documents\/(development|obsidian-vaults|gateway))(\/|$)/ &&
+          lower !~ /(^|\/)node_modules(\/|$)/ && !seen[$0]++) print relative
+    }
+  '
+}
+
+if $list_only; then
+  candidates
+  exit
+fi
+
+# Keep failures readable in the floating terminal, while cancellation is quiet.
+finish() {
+  local status=$?
+  trap - EXIT
+  if [[ $status -ne 0 && -t 0 && -n "$client" ]]; then
+    printf '\nSessionizer failed. Press Enter to close…' >&2
+    read -r _ || true
+  fi
+  if [[ -n "$return_to" && -n "${REX_SESSION:-}" && -n "${REX_BLOCK:-}" ]]; then
+    # Focus the original pane before this terminal closes, so Rex doesn't pick
+    # another split. The helper checks that the picker still owns focus.
+    if ! rex --autostart=false do "$HOME/.config/rex/sessionizer-restore.lua" \
+      -s "$REX_SESSION" -b "$REX_BLOCK" "target=$return_to"; then
+      printf 'Sessionizer could not restore pane focus.\n' >&2
+      status=1
+    fi
+  fi
+  exit "$status"
+}
+trap finish EXIT
+
+if [[ -z "$selected" ]]; then
+  # Herdr inherits these from .zshrc. Rex's command shell doesn't, so read the
+  # same saved theme directly without starting an interactive shell or rewriting
+  # current_theme (which the shared theme manager does when sourced).
+  fzf_config="$HOME/.config/fzf"
+  fzf_theme=rose
+  [[ ! -f "$fzf_config/current_theme" ]] || fzf_theme=$(<"$fzf_config/current_theme")
+  [[ -f "$fzf_config/themes/$fzf_theme.sh" ]] || fzf_theme=rose
+  if [[ -f "$fzf_config/themes/$fzf_theme.sh" ]]; then
+    FZF_DEFAULT_OPTS="${FZF_DEFAULT_OPTS:-}"
+    FZF_THEME_OPTS=""
+    source "$fzf_config/themes/$fzf_theme.sh"
+    export FZF_DEFAULT_OPTS="${FZF_THEME_OPTS:-$FZF_DEFAULT_OPTS}"
+  fi
+  directories=$(candidates)
+  [[ -n "$directories" ]] || exit 0
+  status=0
+  selected=$(printf '%s\n' "$directories" | ESCDELAY=10 fzf --no-sort --no-multi --border --layout=reverse) || status=$?
+  case $status in
+    0) ;;
+    1|130) exit 0 ;;
+    *) printf 'fzf failed (exit %s).\n' "$status" >&2; exit "$status" ;;
+  esac
+  [[ -n "$selected" ]] || exit 0
+  selected="$HOME/$selected"
+fi
+
+[[ -d "$selected" ]] || { printf 'Not a directory: %s\n' "$selected" >&2; exit 1; }
+# Lua canonicalizes once for both picker callbacks and direct action calls.
+[[ "$selected" == /* ]] || selected="$PWD/$selected"
+rex_args=(--autostart=false)
+action_args=("path=$selected")
+if [[ -n "$client" ]]; then
+  rex_args+=(-C "$client")
+  action_args+=("client=$client")
+fi
+rex "${rex_args[@]}" do sessionizer_go "${action_args[@]}"
