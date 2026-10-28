@@ -7,18 +7,7 @@ HERDR_BIN="${HERDR_BIN_PATH:-herdr}"
 if [[ $# -eq 1 ]]; then
   selected="$1"
 else
-  selected=$(
-    zoxide query -l |
-      grep "^$HOME/" |
-      grep -i -E \
-        "^$HOME/\.dotfiles|^$HOME/\.config|^$HOME/documents/development|^$HOME/documents/obsidian-vaults|^$HOME/documents/gateway" |
-      grep -v "node_modules" |
-      sed -E "s;^$HOME/;;; s/^[0-9.]+[[:space:]]+//" |
-      ESCDELAY=10 fzf \
-        --no-sort \
-        --border |
-      sed "s|^|$HOME/|"
-  )
+  selected=$(pick-project)
 fi
 
 [[ -n "${selected:-}" ]] || exit 0
