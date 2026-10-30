@@ -36,5 +36,4 @@ return a nonzero exit status. `pick-project --list` shows the home-relative
 candidates in zoxide order without opening fzf.
 
 Each sessionizer also accepts a directory argument to bypass the picker. Rex's
-wrapper requires the locally configured `sessionizer_go` action and
-`~/.config/rex/sessionizer-restore.lua` for floating-picker focus cleanup.
+wrapper requires the locally configured `sessionizer_go` action.

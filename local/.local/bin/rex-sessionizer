@@ -1,22 +1,19 @@
 #!/usr/bin/env bash
-# Requires the local Rex sessionizer_go action. Floating pickers also use
-# ~/.config/rex/sessionizer-restore.lua to return focus to their source pane.
+# Requires the local Rex sessionizer_go action.
 set -euo pipefail
 
 client="${REX_CLIENT:-}"
-return_to=""
 list_only=false
 selected=""
 
 usage() {
-  printf 'Usage: rex-sessionizer [--client CLIENT] [--return-to BLOCK] [--list | DIRECTORY]\n' >&2
+  printf 'Usage: rex-sessionizer [--client CLIENT] [--list | DIRECTORY]\n' >&2
   exit 2
 }
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --client) [[ $# -ge 2 && -n "$2" ]] || usage; client=$2; shift 2 ;;
-    --return-to) [[ $# -ge 2 && -n "$2" ]] || usage; return_to=$2; shift 2 ;;
     --list) list_only=true; shift ;;
     --) shift; [[ $# -eq 1 && -z "$selected" ]] || usage; selected=$1; shift ;;
     -*) usage ;;
@@ -36,15 +33,6 @@ finish() {
   if [[ $status -ne 0 && -t 0 && -n "$client" ]]; then
     printf '\nSessionizer failed. Press Enter to close…' >&2
     read -r _ || true
-  fi
-  if [[ -n "$return_to" && -n "${REX_SESSION:-}" && -n "${REX_BLOCK:-}" ]]; then
-    # Focus the original pane before this terminal closes, so Rex doesn't pick
-    # another split. The helper checks that the picker still owns focus.
-    if ! rex --autostart=false do "$HOME/.config/rex/sessionizer-restore.lua" \
-      -s "$REX_SESSION" -b "$REX_BLOCK" "target=$return_to"; then
-      printf 'Sessionizer could not restore pane focus.\n' >&2
-      status=1
-    fi
   fi
   exit "$status"
 }
