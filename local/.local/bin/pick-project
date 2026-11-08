@@ -2,19 +2,19 @@
 # Print an absolute project path; cancellation succeeds with no output.
 set -euo pipefail
 
-if [[ $# -gt 1 || ( $# -eq 1 && "$1" != --list ) ]]; then
+if [[ $# -gt 1 || ($# -eq 1 && "$1" != --list) ]]; then
   printf 'Usage: pick-project [--list]\n' >&2
   exit 2
 fi
 
 candidates() {
-  # Preserve zoxide's ranking and the same roots as the Herdr picker. Compare
+  # Preserve zoxide's ranking and restrict results to project roots. Compare
   # literal prefixes so punctuation in HOME is never treated as a regex.
   zoxide query -l | awk -v home="$HOME/" '
     index($0, home) == 1 {
       relative = substr($0, length(home) + 1)
       lower = tolower(relative)
-      if (lower ~ /^(\.dotfiles[^\/]*|\.config|documents\/(development|obsidian-vaults|gateway))(\/|$)/ &&
+      if (lower ~ /^(\.dotfiles[^\/]*|\.config|proj|documents\/(development|obsidian-vaults))(\/|$)/ &&
           lower !~ /(^|\/)node_modules(\/|$)/ && !seen[$0]++) print relative
     }
   '
@@ -42,9 +42,12 @@ directories=$(candidates)
 status=0
 selected=$(printf '%s\n' "$directories" | ESCDELAY=10 fzf --no-sort --no-multi --border --layout=reverse) || status=$?
 case $status in
-  0) ;;
-  1|130) exit 0 ;;
-  *) printf 'fzf failed (exit %s).\n' "$status" >&2; exit "$status" ;;
+0) ;;
+1 | 130) exit 0 ;;
+*)
+  printf 'fzf failed (exit %s).\n' "$status" >&2
+  exit "$status"
+  ;;
 esac
 [[ -n "$selected" ]] || exit 0
 printf '%s\n' "$HOME/$selected"

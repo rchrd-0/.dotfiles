@@ -1,5 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "shell_integration": true,
   "blocks": [
     {
       "segments": [
@@ -13,26 +14,33 @@
             "threshold": 5000
           }
         },
-        // {
-        //   "type": "node",
-        //   "style": "plain",
-        //   "foreground": "cyan",
-        //   "template": "{{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}",
-        //   "options": {
-        //     "fetch_package_manager": true
-        //   }
-        // },
+        // Local JS toolchain: Bun lockfile -> Bun; otherwise Node + package-manager icon.
+        {
+          "type": "node",
+          "style": "plain",
+          "foreground": "cyan",
+          "template": "{{ if ne .PackageManagerName \"bun\" }} {{ or .PackageManagerIcon \"\" }} {{ or .Error .Full }}{{ end }}",
+          "options": {
+            "fetch_package_manager": true
+          }
+        },
+        {
+          "type": "bun",
+          "style": "plain",
+          "foreground": "cyan",
+          "template": "  {{ or .Error .Full }}"
+        },
         {
           "type": "python",
           "style": "plain",
           "foreground": "14",
-          "template": "   {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}"
+          "template": "   {{ if and (not .Error) .Venv }}{{ .Venv }} {{ end }}{{ or .Error .Full }}"
         },
         {
           "type": "go",
           "style": "plain",
           "foreground": "12",
-          "template": "  {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}"
+          "template": "  {{ or .Error .Full }}"
         }
       ],
       "force": true,
@@ -89,8 +97,6 @@
     }
   ],
   "transient_prompt": {
-    "newline": false,
-    // "foreground": "green",
     "foreground_templates": [
       "{{ if gt .Code 0 }}red{{ end }}",
       "{{ if eq .Code 0 }}green{{ end }}"

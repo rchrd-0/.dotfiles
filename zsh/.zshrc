@@ -134,8 +134,7 @@ eval "$(oh-my-posh init zsh --config "$HOME/.config/ohmyposh/rchrd.jsonc")"
 [[ -r "$PRIVATE_DOTFILES_HOME/zsh/post.zsh" ]] \
   && source "$PRIVATE_DOTFILES_HOME/zsh/post.zsh"
 
+source "$HOME/.config/vite-plus/env"
+
 # keep mise last so its PATH and hooks apply after other integrations
 eval "$("$HOME/.local/bin/mise" activate zsh)"
-
-# Vite+ bin (https://viteplus.dev)
-. "/Users/rchrd/.config/vite-plus/env"

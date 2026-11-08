@@ -32,7 +32,7 @@ inner.horizontal = 8
 inner.vertical = 8
 outer.left = 8
 outer.bottom = 8
-outer.top = 8
+outer.top = 4
 outer.right = 8
 
 [mode.main.binding]
@@ -158,6 +158,10 @@ alt-shift-backtick = ['move-node-to-workspace "`"']
 
 [[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
+run = ['layout tiling', 'move-node-to-workspace 1']
+
+[[on-window-detected]]
+if.app-id = 'com.superlogical.rex'
 run = ['layout tiling', 'move-node-to-workspace 1']
 
 [[on-window-detected]]
